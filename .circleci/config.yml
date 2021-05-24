@@ -52,7 +52,7 @@ workflows:
               filters:
                 branches:
                   only:
-                    - master
+                    - main
         jobs:
             - build-test-monitor:
                 context: SNYK
