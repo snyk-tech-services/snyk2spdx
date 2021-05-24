@@ -33,13 +33,11 @@
   ],
   "homepage": "https://github.com/snyk-tech-services/snyk2Spdx#readme",
   "dependencies": {
-    "lodash": "^4.17.15",
-    "source-map-support": "^0.5.16",
-    "tslib": "^1.10.0",
     "debug": "^4.1.1",
-    "@snyk/configstore": "^3.2.0-rc1",
-    "axios": "^0.19.2",
-    "snyk-config": "^3.0.0"
+    "lodash": "^4.17.15",
+    "snyk": "^1.606.0",
+    "source-map-support": "^0.5.16",
+    "tslib": "^1.10.0"
   },
   "devDependencies": {
     "@types/jest": "^25.1.1",
