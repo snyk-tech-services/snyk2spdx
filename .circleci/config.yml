@@ -56,7 +56,7 @@ workflows:
                 filters:
                     branches:
                         only:
-                            - master
+                            - main
     build-test:
         jobs:
             - build-test:
@@ -64,7 +64,7 @@ workflows:
                 filters:
                     branches:
                         ignore:
-                        - master
+                        - main
                         - /pull\/[0-9]+/
             - build-test-from-fork:
                 filters:
