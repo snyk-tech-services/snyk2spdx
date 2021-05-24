@@ -1,0 +1,36 @@
+{
+  "license": "MIT",
+  "semver": {
+    "vulnerable": [
+      "[2005a,)"
+    ]
+  },
+  "id": "snyk:lic:pip:pytz:MIT",
+  "type": "license",
+  "packageManager": "pip",
+  "language": "python",
+  "packageName": "pytz",
+  "title": "MIT license",
+  "description": "MIT license",
+  "publicationTime": "2021-05-23T11:15:36.845Z",
+  "creationTime": "2021-05-23T11:15:36.845Z",
+  "patches": [],
+  "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/MIT.txt",
+  "severity": "high",
+  "legalInstructionsArray": [
+    {
+      "licenseName": "MIT",
+      "legalContent": "Not suitable to use, please find a different package."
+    }
+  ],
+  "from": [
+    "app-with-already-fixed@0.0.0",
+    "django@2.2.18",
+    "pytz@2021.1"
+  ],
+  "upgradePath": [],
+  "isUpgradable": false,
+  "isPatchable": false,
+  "name": "pytz",
+  "version": "2021.1"
+}
