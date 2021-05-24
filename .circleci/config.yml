@@ -16,8 +16,12 @@ jobs:
                 token-variable: SNYK_TOKEN
             - run: npx semantic-release
     build-test:
+        parameters:
+            node_version:
+                type: string
+                ocker:
         docker:
-            - image: circleci/node:latest
+            - image: circleci/node:<< parameters.node_version >>
         steps:
             - checkout
             - run: npm install
@@ -28,8 +32,12 @@ jobs:
                 token-variable: SNYK_TOKEN
             - run: npx tsc
     build-test-from-fork:
+        parameters:
+            node_version:
+                type: string
+                ocker:
         docker:
-            - image: circleci/node:latest
+            - image: circleci/node:<< parameters.node_version >>
         steps:
             - checkout
             - run: npm install
@@ -61,12 +69,18 @@ workflows:
         jobs:
             - build-test:
                 context: SNYK
+                matrix:
+                    parameters:
+                        node_version: [ '10', '12', '14' ]
                 filters:
                     branches:
                         ignore:
                         - main
                         - /pull\/[0-9]+/
             - build-test-from-fork:
+                matrix:
+                    parameters:
+                        node_version: [ '10', '12', '14' ]
                 filters:
                     branches:
                         only:
