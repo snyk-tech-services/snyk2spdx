@@ -1,5 +1,8 @@
 import 'source-map-support/register';
+import { SPDXv3 } from '../types';
 
-export default function(): boolean {
-  return true;
+export function convertSnykTestOutputToSPDX(data: any): SPDXv3 {
+  return ({
+    vulnerabilities: [],
+  }) as SPDXv3;
 }

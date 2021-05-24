@@ -1,0 +1,419 @@
+{
+  "vulnerabilities": [
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:L/A:H",
+      "alternativeIds": [],
+      "creationTime": "2020-03-20T13:31:56.742021Z",
+      "credit": [
+        "Unknown"
+      ],
+      "cvssScore": 9.3,
+      "description": "## Overview\n[json](https://rubygems.org/gems/json) is a JSON implementation as a Ruby extension in C.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS). When parsing certain JSON documents, the json gem (including the one bundled with Ruby) can be coerced into creating arbitrary objects in the target system.\r\n\r\nThis is the same issue as CVE-2013-0269. The previous fix was incomplete, which addressed `JSON.parse(user_input)`, but didn’t address some other styles of JSON\r\nparsing including `JSON(user_input) and JSON.parse(user_input, nil)`.\r\n\r\nSee [CVE-2013-0269](https://snyk.io/vuln/SNYK-RUBY-JSON-20060) in detail.\n\n## Details\n\nDenial of Service (DoS) describes a family of attacks, all aimed at making a system inaccessible to its original and legitimate users. There are many types of DoS attacks, ranging from trying to clog the network pipes to the system by generating a large volume of traffic from many machines (a Distributed Denial of Service - DDoS - attack) to sending crafted requests that cause a system to crash or take a disproportional amount of time to process.\n\nThe Regular expression Denial of Service (ReDoS) is a type of Denial of Service attack. Regular expressions are incredibly powerful, but they aren't very intuitive and can ultimately end up making it easy for attackers to take your site down.\n\nLet’s take the following regular expression as an example:\n```js\nregex = /A(B|C+)+D/\n```\n\nThis regular expression accomplishes the following:\n- `A` The string must start with the letter 'A'\n- `(B|C+)+` The string must then follow the letter A with either the letter 'B' or some number of occurrences of the letter 'C' (the `+` matches one or more times). The `+` at the end of this section states that we can look for one or more matches of this section.\n- `D` Finally, we ensure this section of the string ends with a 'D'\n\nThe expression would match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD` and `ACCCCCD`\n\nIt most cases, it doesn't take very long for a regex engine to find a match:\n\n```bash\n$ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n0.04s user 0.01s system 95% cpu 0.052 total\n\n$ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n1.79s user 0.02s system 99% cpu 1.812 total\n```\n\nThe entire process of testing it against a 30 characters long string takes around ~52ms. But when given an invalid string, it takes nearly two seconds to complete the test, over ten times as long as it took to test a valid string. The dramatic difference is due to the way regular expressions get evaluated.\n\nMost Regex engines will work very similarly (with minor differences). The engine will match the first possible way to accept the current character and proceed to the next one. If it then fails to match the next one, it will backtrack and see if there was another way to digest the previous character. If it goes too far down the rabbit hole only to find out the string doesn’t match in the end, and if many characters have multiple valid regex paths, the number of backtracking steps can become very large, resulting in what is known as _catastrophic backtracking_.\n\nLet's look at how our expression runs into this problem, using a shorter string: \"ACCCX\". While it seems fairly straightforward, there are still four different ways that the engine could match those three C's:\n1. CCC\n2. CC+C\n3. C+CC\n4. C+C+C.\n\nThe engine has to try each of those combinations to see if any of them potentially match against the expression. When you combine that with the other steps the engine must take, we can use [RegEx 101 debugger](https://regex101.com/debugger) to see the engine has to take a total of 38 steps before it can determine the string doesn't match.\n\nFrom there, the number of steps the engine must use to validate a string just continues to grow.\n\n| String | Number of C's | Number of steps |\n| -------|-------------:| -----:|\n| ACCCX | 3 | 38\n| ACCCCX | 4 | 71\n| ACCCCCX | 5 | 136\n| ACCCCCCCCCCCCCCX | 14 | 65,553\n\n\nBy the time the string includes 14 C's, the engine has to take over 65,000 steps just to see if the string is valid. These extreme situations can cause them to work very slowly (exponentially related to input size, as shown above), allowing an attacker to exploit this and can cause the service to excessively consume CPU, resulting in a Denial of Service.\n\n## Remediation\nUpgrade `json` to version 2.3.0 or higher.\n## References\n- [Ruby Advisory](https://www.ruby-lang.org/en/news/2020/03/19/json-dos-cve-2020-10663/)\n",
+      "disclosureTime": "2020-03-20T16:06:03Z",
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "2.3.0"
+      ],
+      "functions": [],
+      "functions_new": [],
+      "id": "SNYK-RUBY-JSON-560838",
+      "identifiers": {
+        "CVE": [
+          "CVE-2020-10663"
+        ],
+        "CWE": [
+          "CWE-400"
+        ]
+      },
+      "language": "ruby",
+      "modificationTime": "2020-06-12T14:37:02.660300Z",
+      "moduleName": "json",
+      "packageManager": "rubygems",
+      "packageName": "json",
+      "patches": [],
+      "proprietary": false,
+      "publicationTime": "2020-03-19T16:04:21Z",
+      "references": [
+        {
+          "title": "Ruby Advisory",
+          "url": "https://www.ruby-lang.org/en/news/2020/03/19/json-dos-cve-2020-10663/"
+        }
+      ],
+      "semver": {
+        "vulnerable": [
+          "<2.3.0"
+        ]
+      },
+      "severity": "high",
+      "severityWithCritical": "critical",
+      "title": "Denial of Service (DoS)",
+      "from": [
+        "ruby-app@*",
+        "json@2.0.2"
+      ],
+      "upgradePath": [
+        false,
+        "json@2.3.0"
+      ],
+      "isUpgradable": true,
+      "isPatchable": false,
+      "name": "json",
+      "version": "2.0.2"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+      "alternativeIds": [],
+      "creationTime": "2016-09-21T12:36:57Z",
+      "credit": [
+        "Unknown"
+      ],
+      "cvssScore": 5.6,
+      "description": "## Overview\n[`lynx`](https://rubygems.org/gems/lynx) is a command line wrapper for MySQL.\nAffected versions of this gem are vulnerable to arbitrary command executions due to a flaw in `lib/lynx/pipe/run.rb`.\n\n## References\n- http://rubysec.com/advisories/OSVDB-108579\n",
+      "disclosureTime": "2014-06-29T21:00:00Z",
+      "exploit": "Not Defined",
+      "fixedIn": [],
+      "functions": [],
+      "functions_new": [],
+      "id": "SNYK-RUBY-LYNX-20160",
+      "identifiers": {
+        "CVE": [],
+        "CWE": [
+          "CWE-77"
+        ],
+        "OSVDB": [
+          "OSVDB-108579"
+        ]
+      },
+      "language": "ruby",
+      "modificationTime": "2019-05-30T11:55:49.846131Z",
+      "moduleName": "lynx",
+      "packageManager": "rubygems",
+      "packageName": "lynx",
+      "patches": [],
+      "proprietary": false,
+      "publicationTime": "2014-06-29T21:00:00Z",
+      "references": [
+        {
+          "title": "RUBYSEC.COM",
+          "url": "http://rubysec.com/advisories/OSVDB-108579"
+        }
+      ],
+      "semver": {
+        "vulnerable": [
+          ">= 0"
+        ]
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "title": "Arbitrary Command Execution",
+      "from": [
+        "ruby-app@*",
+        "lynx@0.4.0"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "lynx",
+      "version": "0.4.0"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+      "alternativeIds": [],
+      "creationTime": "2016-09-21T12:36:57Z",
+      "credit": [
+        "Unknown"
+      ],
+      "cvssScore": 7.8,
+      "description": "## Overview\n[`lynx`](https://rubygems.org/gems/lynx) is a command line wrapper for MySQL.\nAffected versions of this gem are vulnerable due to a flaw in `command/basic.rb` that exposes password information in plaintext in the process table. This may allow a local attacker to gain access to password information.\n\n## References\n- http://rubysec.com/advisories/CVE-2014-5002\n",
+      "disclosureTime": "2014-06-29T21:00:00Z",
+      "exploit": "Not Defined",
+      "fixedIn": [],
+      "functions": [],
+      "functions_new": [],
+      "id": "SNYK-RUBY-LYNX-20161",
+      "identifiers": {
+        "CVE": [
+          "CVE-2014-5002"
+        ],
+        "CWE": [
+          "CWE-200"
+        ],
+        "OSVDB": [
+          "OSVDB-108580"
+        ]
+      },
+      "language": "ruby",
+      "modificationTime": "2019-05-30T11:55:50.567117Z",
+      "moduleName": "lynx",
+      "packageManager": "rubygems",
+      "packageName": "lynx",
+      "patches": [],
+      "proprietary": false,
+      "publicationTime": "2014-06-29T21:00:00Z",
+      "references": [
+        {
+          "title": "RUBYSEC.COM",
+          "url": "http://rubysec.com/advisories/CVE-2014-5002"
+        }
+      ],
+      "semver": {
+        "vulnerable": [
+          ">= 0"
+        ]
+      },
+      "severity": "high",
+      "severityWithCritical": "high",
+      "title": "Local Plaintext Password Disclosure",
+      "from": [
+        "ruby-app@*",
+        "lynx@0.4.0"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "lynx",
+      "version": "0.4.0"
+    }
+  ],
+  "ok": false,
+  "dependencyCount": 2,
+  "org": "snyk-test",
+  "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.19.0\nignore: {}\npatch: {}\n",
+  "isPrivate": true,
+  "licensesPolicy": {
+    "severities": {},
+    "orgLicenseRules": {
+      "AGPL-1.0": {
+        "licenseType": "AGPL-1.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "AGPL-3.0": {
+        "licenseType": "AGPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "Artistic-1.0": {
+        "licenseType": "Artistic-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "Artistic-2.0": {
+        "licenseType": "Artistic-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "CDDL-1.0": {
+        "licenseType": "CDDL-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "CPOL-1.02": {
+        "licenseType": "CPOL-1.02",
+        "severity": "high",
+        "instructions": ""
+      },
+      "EPL-1.0": {
+        "licenseType": "EPL-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "GPL-2.0": {
+        "licenseType": "GPL-2.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "GPL-3.0": {
+        "licenseType": "GPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "LGPL-2.0": {
+        "licenseType": "LGPL-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "LGPL-2.1": {
+        "licenseType": "LGPL-2.1",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "LGPL-3.0": {
+        "licenseType": "LGPL-3.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MPL-1.1": {
+        "licenseType": "MPL-1.1",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MPL-2.0": {
+        "licenseType": "MPL-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MS-RL": {
+        "licenseType": "MS-RL",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "SimPL-2.0": {
+        "licenseType": "SimPL-2.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "MIT": {
+        "licenseType": "MIT",
+        "severity": "high",
+        "instructions": "Not suitable to use, please find a different package."
+      }
+    }
+  },
+  "packageManager": "rubygems",
+  "ignoreSettings": null,
+  "summary": "3 vulnerable dependency paths",
+  "remediation": {
+    "unresolved": [
+      {
+        "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "alternativeIds": [],
+        "creationTime": "2016-09-21T12:36:57Z",
+        "credit": [
+          "Unknown"
+        ],
+        "cvssScore": 5.6,
+        "description": "## Overview\n[`lynx`](https://rubygems.org/gems/lynx) is a command line wrapper for MySQL.\nAffected versions of this gem are vulnerable to arbitrary command executions due to a flaw in `lib/lynx/pipe/run.rb`.\n\n## References\n- http://rubysec.com/advisories/OSVDB-108579\n",
+        "disclosureTime": "2014-06-29T21:00:00Z",
+        "exploit": "Not Defined",
+        "fixedIn": [],
+        "functions": [],
+        "functions_new": [],
+        "id": "SNYK-RUBY-LYNX-20160",
+        "identifiers": {
+          "CVE": [],
+          "CWE": [
+            "CWE-77"
+          ],
+          "OSVDB": [
+            "OSVDB-108579"
+          ]
+        },
+        "language": "ruby",
+        "modificationTime": "2019-05-30T11:55:49.846131Z",
+        "moduleName": "lynx",
+        "packageManager": "rubygems",
+        "packageName": "lynx",
+        "patches": [],
+        "proprietary": false,
+        "publicationTime": "2014-06-29T21:00:00Z",
+        "references": [
+          {
+            "title": "RUBYSEC.COM",
+            "url": "http://rubysec.com/advisories/OSVDB-108579"
+          }
+        ],
+        "semver": {
+          "vulnerable": [
+            ">= 0"
+          ]
+        },
+        "severity": "medium",
+        "severityWithCritical": "medium",
+        "title": "Arbitrary Command Execution",
+        "from": [
+          "ruby-app@*",
+          "lynx@0.4.0"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": false,
+        "name": "lynx",
+        "version": "0.4.0"
+      },
+      {
+        "CVSSv3": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+        "alternativeIds": [],
+        "creationTime": "2016-09-21T12:36:57Z",
+        "credit": [
+          "Unknown"
+        ],
+        "cvssScore": 7.8,
+        "description": "## Overview\n[`lynx`](https://rubygems.org/gems/lynx) is a command line wrapper for MySQL.\nAffected versions of this gem are vulnerable due to a flaw in `command/basic.rb` that exposes password information in plaintext in the process table. This may allow a local attacker to gain access to password information.\n\n## References\n- http://rubysec.com/advisories/CVE-2014-5002\n",
+        "disclosureTime": "2014-06-29T21:00:00Z",
+        "exploit": "Not Defined",
+        "fixedIn": [],
+        "functions": [],
+        "functions_new": [],
+        "id": "SNYK-RUBY-LYNX-20161",
+        "identifiers": {
+          "CVE": [
+            "CVE-2014-5002"
+          ],
+          "CWE": [
+            "CWE-200"
+          ],
+          "OSVDB": [
+            "OSVDB-108580"
+          ]
+        },
+        "language": "ruby",
+        "modificationTime": "2019-05-30T11:55:50.567117Z",
+        "moduleName": "lynx",
+        "packageManager": "rubygems",
+        "packageName": "lynx",
+        "patches": [],
+        "proprietary": false,
+        "publicationTime": "2014-06-29T21:00:00Z",
+        "references": [
+          {
+            "title": "RUBYSEC.COM",
+            "url": "http://rubysec.com/advisories/CVE-2014-5002"
+          }
+        ],
+        "semver": {
+          "vulnerable": [
+            ">= 0"
+          ]
+        },
+        "severity": "high",
+        "severityWithCritical": "high",
+        "title": "Local Plaintext Password Disclosure",
+        "from": [
+          "ruby-app@*",
+          "lynx@0.4.0"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": false,
+        "name": "lynx",
+        "version": "0.4.0"
+      }
+    ],
+    "upgrade": {
+      "json@2.0.2": {
+        "upgradeTo": "json@2.3.0",
+        "upgrades": [
+          "json@2.0.2"
+        ],
+        "vulns": [
+          "SNYK-RUBY-JSON-560838"
+        ]
+      }
+    },
+    "patch": {},
+    "ignore": {},
+    "pin": {}
+  },
+  "filesystemPolicy": false,
+  "filtered": {
+    "ignore": [],
+    "patch": []
+  },
+  "uniqueCount": 3,
+  "projectName": "ruby-app",
+  "displayTargetFile": "Gemfile",
+  "path": "/Users/snyk/workspaces/ruby-app"
+}
