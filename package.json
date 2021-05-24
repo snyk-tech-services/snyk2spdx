@@ -1,6 +1,6 @@
 {
-  "name": "snyk2Spdx",
-  "description": "convert the snyk ouput to spdx format output",
+  "name": "snyk2spdx",
+  "description": "Convert the Snyk CLI ouput to SPDX format output",
   "main": "dist/index.js",
   "scripts": {
     "format:check": "prettier --check '{''{lib,test}/!(fixtures)/**/*,*}.{js,ts,json,yml}'",
@@ -25,7 +25,7 @@
   "author": "Snyk Tech Services",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=12"
+    "node": ">=10"
   },
   "files": [
     "bin",
