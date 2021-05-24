@@ -1,0 +1,1287 @@
+{
+  "vulnerabilities": [
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:N/I:L/A:H",
+      "alternativeIds": [],
+      "creationTime": "2021-02-19T13:39:56.970650Z",
+      "credit": [
+        "Nick Pope"
+      ],
+      "cvssScore": 5.9,
+      "description": "## Overview\n[django](https://pypi.org/project/Django/) is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.\n\nAffected versions of this package are vulnerable to Web Cache Poisoning. Django contains a copy of urllib.parse.parse_qsl() which was added to backport some security fixes. A further security fix has been issued recently such that parse_qsl() no longer allows using ; as a query parameter separator by default.\n## Remediation\nUpgrade `django` to version 2.2.19, 3.0.13, 3.1.7 or higher.\n## References\n- [Django Security Releases](https://www.djangoproject.com/weblog/2021/feb/19/security-releases/)\n- [GitHub Commit](https://github.com/django/django/commit/be8237c7cce24b06aabde0b97afce98ddabbe3b6)\n- [Snyk Cache Poisoning Blogpost](https://snyk.io/blog/cache-poisoning-in-popular-open-source-packages/)\n",
+      "disclosureTime": "2021-02-19T13:28:51Z",
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "2.2.19",
+        "3.0.13",
+        "3.1.7"
+      ],
+      "functions": [],
+      "functions_new": [],
+      "id": "SNYK-PYTHON-DJANGO-1076802",
+      "identifiers": {
+        "CVE": [
+          "CVE-2021-23336"
+        ],
+        "CWE": [
+          "CWE-444"
+        ]
+      },
+      "language": "python",
+      "modificationTime": "2021-02-19T15:54:22.876737Z",
+      "moduleName": "django",
+      "packageManager": "pip",
+      "packageName": "django",
+      "patches": [],
+      "proprietary": false,
+      "publicationTime": "2021-02-19T15:54:23.197747Z",
+      "references": [
+        {
+          "title": "Django Security Releases",
+          "url": "https://www.djangoproject.com/weblog/2021/feb/19/security-releases/"
+        },
+        {
+          "title": "GitHub Commit",
+          "url": "https://github.com/django/django/commit/be8237c7cce24b06aabde0b97afce98ddabbe3b6"
+        },
+        {
+          "title": "Snyk Cache Poisoning Blogpost",
+          "url": "https://snyk.io/blog/cache-poisoning-in-popular-open-source-packages/"
+        }
+      ],
+      "semver": {
+        "vulnerable": [
+          "[2.2,2.2.19)",
+          "[3.0,3.0.13)",
+          "[3.1,3.1.7)"
+        ]
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "title": "Web Cache Poisoning",
+      "from": [
+        "app-with-already-fixed@0.0.0",
+        "django@2.2.18"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "django",
+      "version": "2.2.18"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "alternativeIds": [],
+      "creationTime": "2021-04-06T09:22:54.987556Z",
+      "credit": [
+        "Dennis Brinkrolf"
+      ],
+      "cvssScore": 3.7,
+      "description": "## Overview\n[django](https://pypi.org/project/Django/) is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.\n\nAffected versions of this package are vulnerable to Directory Traversal. `MultiPartParser` allowed directory-traversal via uploaded files with suitably crafted file names.\n\n## Details\n\nA Directory Traversal attack (also known as path traversal) aims to access files and directories that are stored outside the intended folder. By manipulating files with \"dot-dot-slash (../)\" sequences and its variations, or by using absolute file paths, it may be possible to access arbitrary files and directories stored on file system, including application source code, configuration, and other critical system files.\n\nDirectory Traversal vulnerabilities can be generally divided into two types:\n\n- **Information Disclosure**: Allows the attacker to gain information about the folder structure or read the contents of sensitive files on the system.\n\n`st` is a module for serving static files on web pages, and contains a [vulnerability of this type](https://snyk.io/vuln/npm:st:20140206). In our example, we will serve files from the `public` route.\n\nIf an attacker requests the following URL from our server, it will in turn leak the sensitive private key of the root user.\n\n```\ncurl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa\n```\n**Note** `%2e` is the URL encoded version of `.` (dot).\n\n- **Writing arbitrary files**: Allows the attacker to create or replace existing files. This type of vulnerability is also known as `Zip-Slip`. \n\nOne way to achieve this is by using a malicious `zip` archive that holds path traversal filenames. When each filename in the zip archive gets concatenated to the target extraction folder, without validation, the final path ends up outside of the target folder. If an executable or a configuration file is overwritten with a file containing malicious code, the problem can turn into an arbitrary code execution issue quite easily.\n\nThe following is an example of a `zip` archive with one benign file and one malicious file. Extracting the malicious file will result in traversing out of the target folder, ending up in `/root/.ssh/` overwriting the `authorized_keys` file:\n\n```\n2018-04-15 22:04:29 .....           19           19  good.txt\n2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys\n```\n\n## Remediation\nUpgrade `django` to version 2.2.20, 3.0.14, 3.1.8 or higher.\n## References\n- [GitHub Commit](https://github.com/django/django/commit/2820fd1be5dfccbf1216c3845fad8580502473e1)\n- [GitHub Commit](https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a454ca49c2)\n- [GitHub Commit](https://github.com/django/django/commit/cca0d98118cccf9ae0c6dcf2d6c57fc50469fbf0)\n- [GitHub Commit](https://github.com/django/django/commit/d4d800ca1addc4141e03c5440a849bb64d1582cd)\n- [GitHub Commit](https://github.com/django/django/commit/e7fba62248f604c76da4f23dcf1db4a57b0808ea)\n",
+      "disclosureTime": "2021-04-06T09:18:59Z",
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "2.2.20",
+        "3.0.14",
+        "3.1.8"
+      ],
+      "functions": [],
+      "functions_new": [],
+      "id": "SNYK-PYTHON-DJANGO-1090612",
+      "identifiers": {
+        "CVE": [
+          "CVE-2021-28658"
+        ],
+        "CWE": [
+          "CWE-22"
+        ]
+      },
+      "language": "python",
+      "modificationTime": "2021-04-06T13:57:02.213825Z",
+      "moduleName": "django",
+      "packageManager": "pip",
+      "packageName": "django",
+      "patches": [],
+      "proprietary": false,
+      "publicationTime": "2021-04-06T13:57:02.482219Z",
+      "references": [
+        {
+          "title": "GitHub Commit",
+          "url": "https://github.com/django/django/commit/2820fd1be5dfccbf1216c3845fad8580502473e1"
+        },
+        {
+          "title": "GitHub Commit",
+          "url": "https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a454ca49c2"
+        },
+        {
+          "title": "GitHub Commit",
+          "url": "https://github.com/django/django/commit/cca0d98118cccf9ae0c6dcf2d6c57fc50469fbf0"
+        },
+        {
+          "title": "GitHub Commit",
+          "url": "https://github.com/django/django/commit/d4d800ca1addc4141e03c5440a849bb64d1582cd"
+        },
+        {
+          "title": "GitHub Commit",
+          "url": "https://github.com/django/django/commit/e7fba62248f604c76da4f23dcf1db4a57b0808ea"
+        }
+      ],
+      "semver": {
+        "vulnerable": [
+          "[2.2, 2.2.20)",
+          "[3.0, 3.0.14)",
+          "[3.1, 3.1.8)"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "title": "Directory Traversal",
+      "from": [
+        "app-with-already-fixed@0.0.0",
+        "django@2.2.18"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "django",
+      "version": "2.2.18"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+      "alternativeIds": [],
+      "creationTime": "2021-05-04T12:51:50.753891Z",
+      "credit": [
+        "Jasu Viding"
+      ],
+      "cvssScore": 3.3,
+      "description": "## Overview\n[django](https://pypi.org/project/Django/) is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.\n\nAffected versions of this package are vulnerable to Directory Traversal. `MultiPartParser`, `UploadedFile`, and `FieldFile` allow directory-traversal via uploaded files with suitably crafted file names.\n\n## Details\n\nA Directory Traversal attack (also known as path traversal) aims to access files and directories that are stored outside the intended folder. By manipulating files with \"dot-dot-slash (../)\" sequences and its variations, or by using absolute file paths, it may be possible to access arbitrary files and directories stored on file system, including application source code, configuration, and other critical system files.\n\nDirectory Traversal vulnerabilities can be generally divided into two types:\n\n- **Information Disclosure**: Allows the attacker to gain information about the folder structure or read the contents of sensitive files on the system.\n\n`st` is a module for serving static files on web pages, and contains a [vulnerability of this type](https://snyk.io/vuln/npm:st:20140206). In our example, we will serve files from the `public` route.\n\nIf an attacker requests the following URL from our server, it will in turn leak the sensitive private key of the root user.\n\n```\ncurl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa\n```\n**Note** `%2e` is the URL encoded version of `.` (dot).\n\n- **Writing arbitrary files**: Allows the attacker to create or replace existing files. This type of vulnerability is also known as `Zip-Slip`. \n\nOne way to achieve this is by using a malicious `zip` archive that holds path traversal filenames. When each filename in the zip archive gets concatenated to the target extraction folder, without validation, the final path ends up outside of the target folder. If an executable or a configuration file is overwritten with a file containing malicious code, the problem can turn into an arbitrary code execution issue quite easily.\n\nThe following is an example of a `zip` archive with one benign file and one malicious file. Extracting the malicious file will result in traversing out of the target folder, ending up in `/root/.ssh/` overwriting the `authorized_keys` file:\n\n```\n2018-04-15 22:04:29 .....           19           19  good.txt\n2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys\n```\n\n## Remediation\nUpgrade `django` to version 2.2.21, 3.1.9, 3.2.1 or higher.\n## References\n- [Django Advisory](https://www.djangoproject.com/weblog/2021/may/04/security-releases/)\n- [GitHub Commit](https://github.com/django/django/commit/c98f446c188596d4ba6de71d1b77b4a6c5c2a007)\n",
+      "disclosureTime": "2021-05-04T12:44:10Z",
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "2.2.21",
+        "3.1.9",
+        "3.2.1"
+      ],
+      "functions": [],
+      "functions_new": [],
+      "id": "SNYK-PYTHON-DJANGO-1279042",
+      "identifiers": {
+        "CVE": [
+          "CVE-2021-31542"
+        ],
+        "CWE": [
+          "CWE-22"
+        ]
+      },
+      "language": "python",
+      "modificationTime": "2021-05-04T14:45:09.894750Z",
+      "moduleName": "django",
+      "packageManager": "pip",
+      "packageName": "django",
+      "patches": [],
+      "proprietary": false,
+      "publicationTime": "2021-05-04T14:45:10.137628Z",
+      "references": [
+        {
+          "title": "Django Advisory",
+          "url": "https://www.djangoproject.com/weblog/2021/may/04/security-releases/"
+        },
+        {
+          "title": "GitHub Commit",
+          "url": "https://github.com/django/django/commit/c98f446c188596d4ba6de71d1b77b4a6c5c2a007"
+        }
+      ],
+      "semver": {
+        "vulnerable": [
+          "[, 2.2.21)",
+          "[3.0, 3.1.9)",
+          "[3.2, 3.2.1)"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "title": "Directory Traversal",
+      "from": [
+        "app-with-already-fixed@0.0.0",
+        "django@2.2.18"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "django",
+      "version": "2.2.18"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+      "alternativeIds": [],
+      "creationTime": "2021-05-06T14:52:58.420987Z",
+      "credit": [
+        "Unknown"
+      ],
+      "cvssScore": 7.3,
+      "description": "## Overview\n[django](https://pypi.org/project/Django/) is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.\n\nAffected versions of this package are vulnerable to HTTP Header Injection. In Python 3.9.5+ urllib.parse() automatically removes ASCII newlines and tabs from URLs. Unfortunately it created an issue in the URLValidator. URLValidator uses `urllib.urlsplit()` and `urllib.urlunsplit()` for creating a URL variant with Punycode which no longer contains newlines and tabs in Python 3.9.5+. As a consequence, the regular expression matched the URL (without unsafe characters) and the source value (with unsafe characters) was considered valid.\r\n\r\nThis issue was introduced by the [bpo-43882](https://bugs.python.org/issue43882) fix.\n## Remediation\nUpgrade `django` to version 3.2.2, 3.1.10, 2.2.22 or higher.\n## References\n- [Django Security Releases](https://www.djangoproject.com/weblog/2021/may/06/security-releases/)\n- [GitHub Commit](https://github.com/django/django/commit/e1e81aa1c4427411e3c68facdd761229ffea6f6f)\n- [GitHub PR](https://github.com/django/django/pull/14360)\n- [Mail Archive](https://www.mail-archive.com/debian-bugs-dist@lists.debian.org/msg1804086.html)\n",
+      "disclosureTime": "2021-05-06T14:44:15Z",
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "2.2.22",
+        "3.1.10",
+        "3.2.2"
+      ],
+      "functions": [],
+      "functions_new": [],
+      "id": "SNYK-PYTHON-DJANGO-1290072",
+      "identifiers": {
+        "CVE": [
+          "CVE-2021-32052"
+        ],
+        "CWE": [
+          "CWE-644"
+        ]
+      },
+      "language": "python",
+      "modificationTime": "2021-05-06T15:41:43.922301Z",
+      "moduleName": "django",
+      "packageManager": "pip",
+      "packageName": "django",
+      "patches": [],
+      "proprietary": false,
+      "publicationTime": "2021-05-06T15:41:44.175836Z",
+      "references": [
+        {
+          "title": "Django Security Releases",
+          "url": "https://www.djangoproject.com/weblog/2021/may/06/security-releases/"
+        },
+        {
+          "title": "GitHub Commit",
+          "url": "https://github.com/django/django/commit/e1e81aa1c4427411e3c68facdd761229ffea6f6f"
+        },
+        {
+          "title": "GitHub PR",
+          "url": "https://github.com/django/django/pull/14360"
+        },
+        {
+          "title": "Mail Archive",
+          "url": "https://www.mail-archive.com/debian-bugs-dist@lists.debian.org/msg1804086.html"
+        }
+      ],
+      "semver": {
+        "vulnerable": [
+          "[3.2,3.2.2)",
+          "[3.0,3.1.10)",
+          "[,2.2.22)"
+        ]
+      },
+      "severity": "high",
+      "severityWithCritical": "high",
+      "title": "HTTP Header Injection",
+      "from": [
+        "app-with-already-fixed@0.0.0",
+        "django@2.2.18"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "django",
+      "version": "2.2.18"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L/E:P",
+      "alternativeIds": [],
+      "creationTime": "2020-09-25T17:30:26.286074Z",
+      "credit": [
+        "Yeting Li"
+      ],
+      "cvssScore": 5.3,
+      "description": "## Overview\n[jinja2](https://pypi.org/project/Jinja2/) is a template engine written in pure Python. It provides a Django inspired non-XML syntax but supports inline expressions and an optional sandboxed environment.\n\nAffected versions of this package are vulnerable to Regular Expression Denial of Service (ReDoS). The ReDoS vulnerability is mainly due to the `_punctuation_re regex` operator and its use of multiple wildcards. The last wildcard is the most exploitable as it searches for trailing punctuation.\r\n\r\nThis issue can be mitigated by using Markdown to format user content instead of the urlize filter, or by implementing request timeouts or limiting process memory.\r\n\r\n### PoC by Yeting Li\r\n```\r\nfrom jinja2.utils import urlize\r\nfrom time import perf_counter\r\n\r\nfor i in range(3):\r\n    text = \"abc@\" + \".\" * (i+1)*5000 + \"!\"\r\n    LEN = len(text)\r\n    BEGIN = perf_counter()\r\n    urlize(text)\r\n    DURATION = perf_counter() - BEGIN\r\n    print(f\"{LEN}: took {DURATION} seconds!\")\r\n```\n\n## Details\n\nDenial of Service (DoS) describes a family of attacks, all aimed at making a system inaccessible to its original and legitimate users. There are many types of DoS attacks, ranging from trying to clog the network pipes to the system by generating a large volume of traffic from many machines (a Distributed Denial of Service - DDoS - attack) to sending crafted requests that cause a system to crash or take a disproportional amount of time to process.\n\nThe Regular expression Denial of Service (ReDoS) is a type of Denial of Service attack. Regular expressions are incredibly powerful, but they aren't very intuitive and can ultimately end up making it easy for attackers to take your site down.\n\nLet’s take the following regular expression as an example:\n```js\nregex = /A(B|C+)+D/\n```\n\nThis regular expression accomplishes the following:\n- `A` The string must start with the letter 'A'\n- `(B|C+)+` The string must then follow the letter A with either the letter 'B' or some number of occurrences of the letter 'C' (the `+` matches one or more times). The `+` at the end of this section states that we can look for one or more matches of this section.\n- `D` Finally, we ensure this section of the string ends with a 'D'\n\nThe expression would match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD` and `ACCCCCD`\n\nIt most cases, it doesn't take very long for a regex engine to find a match:\n\n```bash\n$ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n0.04s user 0.01s system 95% cpu 0.052 total\n\n$ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n1.79s user 0.02s system 99% cpu 1.812 total\n```\n\nThe entire process of testing it against a 30 characters long string takes around ~52ms. But when given an invalid string, it takes nearly two seconds to complete the test, over ten times as long as it took to test a valid string. The dramatic difference is due to the way regular expressions get evaluated.\n\nMost Regex engines will work very similarly (with minor differences). The engine will match the first possible way to accept the current character and proceed to the next one. If it then fails to match the next one, it will backtrack and see if there was another way to digest the previous character. If it goes too far down the rabbit hole only to find out the string doesn’t match in the end, and if many characters have multiple valid regex paths, the number of backtracking steps can become very large, resulting in what is known as _catastrophic backtracking_.\n\nLet's look at how our expression runs into this problem, using a shorter string: \"ACCCX\". While it seems fairly straightforward, there are still four different ways that the engine could match those three C's:\n1. CCC\n2. CC+C\n3. C+CC\n4. C+C+C.\n\nThe engine has to try each of those combinations to see if any of them potentially match against the expression. When you combine that with the other steps the engine must take, we can use [RegEx 101 debugger](https://regex101.com/debugger) to see the engine has to take a total of 38 steps before it can determine the string doesn't match.\n\nFrom there, the number of steps the engine must use to validate a string just continues to grow.\n\n| String | Number of C's | Number of steps |\n| -------|-------------:| -----:|\n| ACCCX | 3 | 38\n| ACCCCX | 4 | 71\n| ACCCCCX | 5 | 136\n| ACCCCCCCCCCCCCCX | 14 | 65,553\n\n\nBy the time the string includes 14 C's, the engine has to take over 65,000 steps just to see if the string is valid. These extreme situations can cause them to work very slowly (exponentially related to input size, as shown above), allowing an attacker to exploit this and can cause the service to excessively consume CPU, resulting in a Denial of Service.\n\n## Remediation\nUpgrade `jinja2` to version 2.11.3 or higher.\n## References\n- [GitHub Additional Information](https://github.com/pallets/jinja/blob/ab81fd9c277900c85da0c322a2ff9d68a235b2e6/src/jinja2/utils.py#L20)\n- [GitHub PR](https://github.com/pallets/jinja/pull/1343)\n",
+      "disclosureTime": "2020-09-25T17:29:19Z",
+      "exploit": "Proof of Concept",
+      "fixedIn": [
+        "2.11.3"
+      ],
+      "functions": [],
+      "functions_new": [],
+      "id": "SNYK-PYTHON-JINJA2-1012994",
+      "identifiers": {
+        "CVE": [
+          "CVE-2020-28493"
+        ],
+        "CWE": [
+          "CWE-400"
+        ],
+        "GHSA": [
+          "GHSA-g3rq-g295-4j3m"
+        ]
+      },
+      "language": "python",
+      "modificationTime": "2021-02-01T19:52:16.877030Z",
+      "moduleName": "jinja2",
+      "packageManager": "pip",
+      "packageName": "jinja2",
+      "patches": [],
+      "proprietary": true,
+      "publicationTime": "2021-02-01T19:52:17Z",
+      "references": [
+        {
+          "title": "GitHub Additional Information",
+          "url": "https://github.com/pallets/jinja/blob/ab81fd9c277900c85da0c322a2ff9d68a235b2e6/src/jinja2/utils.py%23L20"
+        },
+        {
+          "title": "GitHub PR",
+          "url": "https://github.com/pallets/jinja/pull/1343"
+        }
+      ],
+      "semver": {
+        "vulnerable": [
+          "[,2.11.3)"
+        ]
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "title": "Regular Expression Denial of Service (ReDoS)",
+      "from": [
+        "app-with-already-fixed@0.0.0",
+        "jinja2@2.7.2"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "jinja2",
+      "version": "2.7.2"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:L/I:L/A:L/RL:O",
+      "alternativeIds": [],
+      "creationTime": "2019-04-07T10:24:16.310959Z",
+      "credit": [
+        "Unknown"
+      ],
+      "cvssScore": 6,
+      "description": "## Overview\n[jinja2](https://pypi.org/project/Jinja2/) is a template engine written in pure Python. It provides a Django inspired non-XML syntax but supports inline expressions and an optional sandboxed environment.\n\nAffected versions of this package are vulnerable to Sandbox Escape via the `str.format_map`.\n## Remediation\nUpgrade `jinja2` to version 2.10.1 or higher.\n## References\n- [Release Notes](https://palletsprojects.com/blog/jinja-2-10-1-released)\n",
+      "disclosureTime": "2019-04-07T00:42:43Z",
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "2.10.1"
+      ],
+      "functions": [],
+      "functions_new": [],
+      "id": "SNYK-PYTHON-JINJA2-174126",
+      "identifiers": {
+        "CVE": [
+          "CVE-2019-10906"
+        ],
+        "CWE": [
+          "CWE-265"
+        ]
+      },
+      "language": "python",
+      "modificationTime": "2020-06-12T14:36:55.661596Z",
+      "moduleName": "jinja2",
+      "packageManager": "pip",
+      "packageName": "jinja2",
+      "patches": [],
+      "proprietary": false,
+      "publicationTime": "2019-04-07T00:42:43Z",
+      "references": [
+        {
+          "title": "Release Notes",
+          "url": "https://palletsprojects.com/blog/jinja-2-10-1-released"
+        }
+      ],
+      "semver": {
+        "vulnerable": [
+          "[,2.10.1)"
+        ]
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "title": "Sandbox Escape",
+      "from": [
+        "app-with-already-fixed@0.0.0",
+        "jinja2@2.7.2"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "jinja2",
+      "version": "2.7.2"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:L",
+      "alternativeIds": [],
+      "creationTime": "2017-05-28T08:29:50.295000Z",
+      "credit": [
+        "Arun Babu Neelicattu"
+      ],
+      "cvssScore": 5.3,
+      "description": "## Overview\r\n[`jinja2`](https://pypi.python.org/pypi/jinja2) is a small but fast and easy to use stand-alone template engine written in pure python.\r\nFileSystemBytecodeCache in Jinja2 2.7.2 does not properly create temporary directories, which allows local users to gain privileges by pre-creating a temporary directory with a user's uid.\r\n\r\n**NOTE:** this vulnerability exists because of an incomplete fix for [CVE-2014-1402](https://snyk.io/vulnSNYK-PYTHON-JINJA2-40028).\r\n\r\n## References\r\n- [NVD](https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0012)\r\n- [Bugzilla redhat](https://bugzilla.redhat.com/show_bug.cgi?id=1051421)\r\n- [GitHub PR #1](https://github.com/mitsuhiko/jinja2/pull/292)\r\n- [GitHub PR #2](https://github.com/mitsuhiko/jinja2/pull/296)\r\n- [GitHub Commit](https://github.com/mitsuhiko/jinja2/commit/acb672b6a179567632e032f547582f30fa2f4aa7)\r\n",
+      "disclosureTime": "2014-01-18T05:33:40.101000Z",
+      "exploit": "Not Defined",
+      "fixedIn": [],
+      "functions": [],
+      "functions_new": [],
+      "id": "SNYK-PYTHON-JINJA2-40250",
+      "identifiers": {
+        "CVE": [
+          "CVE-2014-0012"
+        ],
+        "CWE": [
+          "CWE-264"
+        ]
+      },
+      "language": "python",
+      "modificationTime": "2019-02-17T08:46:41.648104Z",
+      "moduleName": "jinja2",
+      "packageManager": "pip",
+      "packageName": "jinja2",
+      "patches": [],
+      "proprietary": false,
+      "publicationTime": "2014-01-18T05:33:40.101000Z",
+      "references": [
+        {
+          "title": "GitHub Commit",
+          "url": "https://github.com/mitsuhiko/jinja2/commit/acb672b6a179567632e032f547582f30fa2f4aa7"
+        },
+        {
+          "title": "GitHub PR",
+          "url": "https://github.com/mitsuhiko/jinja2/pull/292"
+        },
+        {
+          "title": "GitHub PR",
+          "url": "https://github.com/mitsuhiko/jinja2/pull/296"
+        },
+        {
+          "title": "NVD",
+          "url": "https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0012"
+        },
+        {
+          "title": "RedHat Bugzilla Bug",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=1051421"
+        }
+      ],
+      "semver": {
+        "vulnerable": [
+          "[2.7.2]"
+        ]
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "title": "Privilege Escalation",
+      "from": [
+        "app-with-already-fixed@0.0.0",
+        "jinja2@2.7.2"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "jinja2",
+      "version": "2.7.2"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N",
+      "alternativeIds": [],
+      "creationTime": "2019-07-29T13:28:48.288799Z",
+      "credit": [
+        "Unknown"
+      ],
+      "cvssScore": 8.6,
+      "description": "## Overview\n[jinja2](https://pypi.org/project/Jinja2/) is a template engine written in pure Python. It provides a Django inspired non-XML syntax but supports inline expressions and an optional sandboxed environment.\n\nAffected versions of this package are vulnerable to Sandbox Bypass. Users were allowed to insert `str.format` through web templates, leading to an escape from sandbox.\n## Remediation\nUpgrade `jinja2` to version 2.8.1 or higher.\n## References\n- [GitHub Commit](https://github.com/pallets/jinja/commit/9b53045c34e61013dc8f09b7e52a555fa16bed16)\n",
+      "disclosureTime": "2016-12-29T13:27:18Z",
+      "exploit": "Not Defined",
+      "fixedIn": [
+        "2.8.1"
+      ],
+      "functions": [],
+      "functions_new": [],
+      "id": "SNYK-PYTHON-JINJA2-455616",
+      "identifiers": {
+        "CVE": [
+          "CVE-2016-10745"
+        ],
+        "CWE": [
+          "CWE-234"
+        ]
+      },
+      "language": "python",
+      "modificationTime": "2020-06-12T14:36:58.461729Z",
+      "moduleName": "jinja2",
+      "packageManager": "pip",
+      "packageName": "jinja2",
+      "patches": [],
+      "proprietary": false,
+      "publicationTime": "2019-07-30T13:11:16Z",
+      "references": [
+        {
+          "title": "GitHub Commit",
+          "url": "https://github.com/pallets/jinja/commit/9b53045c34e61013dc8f09b7e52a555fa16bed16"
+        }
+      ],
+      "semver": {
+        "vulnerable": [
+          "[2.5, 2.8.1)"
+        ]
+      },
+      "severity": "high",
+      "severityWithCritical": "high",
+      "title": "Sandbox Bypass",
+      "from": [
+        "app-with-already-fixed@0.0.0",
+        "jinja2@2.7.2"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "jinja2",
+      "version": "2.7.2"
+    },
+    {
+      "license": "MIT",
+      "semver": {
+        "vulnerable": [
+          "[2005a,)"
+        ]
+      },
+      "id": "snyk:lic:pip:pytz:MIT",
+      "type": "license",
+      "packageManager": "pip",
+      "language": "python",
+      "packageName": "pytz",
+      "title": "MIT license",
+      "description": "MIT license",
+      "publicationTime": "2021-05-23T11:15:36.845Z",
+      "creationTime": "2021-05-23T11:15:36.845Z",
+      "patches": [],
+      "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/MIT.txt",
+      "severity": "high",
+      "legalInstructionsArray": [
+        {
+          "licenseName": "MIT",
+          "legalContent": "Not suitable to use, please find a different package."
+        }
+      ],
+      "from": [
+        "app-with-already-fixed@0.0.0",
+        "django@2.2.18",
+        "pytz@2021.1"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "pytz",
+      "version": "2021.1"
+    }
+  ],
+  "ok": false,
+  "dependencyCount": 6,
+  "org": "snyk-test",
+  "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.19.0\nignore: {}\npatch: {}\n",
+  "isPrivate": true,
+  "licensesPolicy": {
+    "severities": {},
+    "orgLicenseRules": {
+      "AGPL-1.0": {
+        "licenseType": "AGPL-1.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "AGPL-3.0": {
+        "licenseType": "AGPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "Artistic-1.0": {
+        "licenseType": "Artistic-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "Artistic-2.0": {
+        "licenseType": "Artistic-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "CDDL-1.0": {
+        "licenseType": "CDDL-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "CPOL-1.02": {
+        "licenseType": "CPOL-1.02",
+        "severity": "high",
+        "instructions": ""
+      },
+      "EPL-1.0": {
+        "licenseType": "EPL-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "GPL-2.0": {
+        "licenseType": "GPL-2.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "GPL-3.0": {
+        "licenseType": "GPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "LGPL-2.0": {
+        "licenseType": "LGPL-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "LGPL-2.1": {
+        "licenseType": "LGPL-2.1",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "LGPL-3.0": {
+        "licenseType": "LGPL-3.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MPL-1.1": {
+        "licenseType": "MPL-1.1",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MPL-2.0": {
+        "licenseType": "MPL-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MS-RL": {
+        "licenseType": "MS-RL",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "SimPL-2.0": {
+        "licenseType": "SimPL-2.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "MIT": {
+        "licenseType": "MIT",
+        "severity": "high",
+        "instructions": "Not suitable to use, please find a different package."
+      }
+    }
+  },
+  "packageManager": "pip",
+  "ignoreSettings": null,
+  "summary": "9 vulnerable dependency paths",
+  "remediation": {
+    "unresolved": [
+      {
+        "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:N/I:L/A:H",
+        "alternativeIds": [],
+        "creationTime": "2021-02-19T13:39:56.970650Z",
+        "credit": [
+          "Nick Pope"
+        ],
+        "cvssScore": 5.9,
+        "description": "## Overview\n[django](https://pypi.org/project/Django/) is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.\n\nAffected versions of this package are vulnerable to Web Cache Poisoning. Django contains a copy of urllib.parse.parse_qsl() which was added to backport some security fixes. A further security fix has been issued recently such that parse_qsl() no longer allows using ; as a query parameter separator by default.\n## Remediation\nUpgrade `django` to version 2.2.19, 3.0.13, 3.1.7 or higher.\n## References\n- [Django Security Releases](https://www.djangoproject.com/weblog/2021/feb/19/security-releases/)\n- [GitHub Commit](https://github.com/django/django/commit/be8237c7cce24b06aabde0b97afce98ddabbe3b6)\n- [Snyk Cache Poisoning Blogpost](https://snyk.io/blog/cache-poisoning-in-popular-open-source-packages/)\n",
+        "disclosureTime": "2021-02-19T13:28:51Z",
+        "exploit": "Not Defined",
+        "fixedIn": [
+          "2.2.19",
+          "3.0.13",
+          "3.1.7"
+        ],
+        "functions": [],
+        "functions_new": [],
+        "id": "SNYK-PYTHON-DJANGO-1076802",
+        "identifiers": {
+          "CVE": [
+            "CVE-2021-23336"
+          ],
+          "CWE": [
+            "CWE-444"
+          ]
+        },
+        "language": "python",
+        "modificationTime": "2021-02-19T15:54:22.876737Z",
+        "moduleName": "django",
+        "packageManager": "pip",
+        "packageName": "django",
+        "patches": [],
+        "proprietary": false,
+        "publicationTime": "2021-02-19T15:54:23.197747Z",
+        "references": [
+          {
+            "title": "Django Security Releases",
+            "url": "https://www.djangoproject.com/weblog/2021/feb/19/security-releases/"
+          },
+          {
+            "title": "GitHub Commit",
+            "url": "https://github.com/django/django/commit/be8237c7cce24b06aabde0b97afce98ddabbe3b6"
+          },
+          {
+            "title": "Snyk Cache Poisoning Blogpost",
+            "url": "https://snyk.io/blog/cache-poisoning-in-popular-open-source-packages/"
+          }
+        ],
+        "semver": {
+          "vulnerable": [
+            "[2.2,2.2.19)",
+            "[3.0,3.0.13)",
+            "[3.1,3.1.7)"
+          ]
+        },
+        "severity": "medium",
+        "severityWithCritical": "medium",
+        "title": "Web Cache Poisoning",
+        "from": [
+          "app-with-already-fixed@0.0.0",
+          "django@2.2.18"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": true,
+        "name": "django",
+        "version": "2.2.18"
+      },
+      {
+        "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
+        "alternativeIds": [],
+        "creationTime": "2021-04-06T09:22:54.987556Z",
+        "credit": [
+          "Dennis Brinkrolf"
+        ],
+        "cvssScore": 3.7,
+        "description": "## Overview\n[django](https://pypi.org/project/Django/) is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.\n\nAffected versions of this package are vulnerable to Directory Traversal. `MultiPartParser` allowed directory-traversal via uploaded files with suitably crafted file names.\n\n## Details\n\nA Directory Traversal attack (also known as path traversal) aims to access files and directories that are stored outside the intended folder. By manipulating files with \"dot-dot-slash (../)\" sequences and its variations, or by using absolute file paths, it may be possible to access arbitrary files and directories stored on file system, including application source code, configuration, and other critical system files.\n\nDirectory Traversal vulnerabilities can be generally divided into two types:\n\n- **Information Disclosure**: Allows the attacker to gain information about the folder structure or read the contents of sensitive files on the system.\n\n`st` is a module for serving static files on web pages, and contains a [vulnerability of this type](https://snyk.io/vuln/npm:st:20140206). In our example, we will serve files from the `public` route.\n\nIf an attacker requests the following URL from our server, it will in turn leak the sensitive private key of the root user.\n\n```\ncurl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa\n```\n**Note** `%2e` is the URL encoded version of `.` (dot).\n\n- **Writing arbitrary files**: Allows the attacker to create or replace existing files. This type of vulnerability is also known as `Zip-Slip`. \n\nOne way to achieve this is by using a malicious `zip` archive that holds path traversal filenames. When each filename in the zip archive gets concatenated to the target extraction folder, without validation, the final path ends up outside of the target folder. If an executable or a configuration file is overwritten with a file containing malicious code, the problem can turn into an arbitrary code execution issue quite easily.\n\nThe following is an example of a `zip` archive with one benign file and one malicious file. Extracting the malicious file will result in traversing out of the target folder, ending up in `/root/.ssh/` overwriting the `authorized_keys` file:\n\n```\n2018-04-15 22:04:29 .....           19           19  good.txt\n2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys\n```\n\n## Remediation\nUpgrade `django` to version 2.2.20, 3.0.14, 3.1.8 or higher.\n## References\n- [GitHub Commit](https://github.com/django/django/commit/2820fd1be5dfccbf1216c3845fad8580502473e1)\n- [GitHub Commit](https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a454ca49c2)\n- [GitHub Commit](https://github.com/django/django/commit/cca0d98118cccf9ae0c6dcf2d6c57fc50469fbf0)\n- [GitHub Commit](https://github.com/django/django/commit/d4d800ca1addc4141e03c5440a849bb64d1582cd)\n- [GitHub Commit](https://github.com/django/django/commit/e7fba62248f604c76da4f23dcf1db4a57b0808ea)\n",
+        "disclosureTime": "2021-04-06T09:18:59Z",
+        "exploit": "Not Defined",
+        "fixedIn": [
+          "2.2.20",
+          "3.0.14",
+          "3.1.8"
+        ],
+        "functions": [],
+        "functions_new": [],
+        "id": "SNYK-PYTHON-DJANGO-1090612",
+        "identifiers": {
+          "CVE": [
+            "CVE-2021-28658"
+          ],
+          "CWE": [
+            "CWE-22"
+          ]
+        },
+        "language": "python",
+        "modificationTime": "2021-04-06T13:57:02.213825Z",
+        "moduleName": "django",
+        "packageManager": "pip",
+        "packageName": "django",
+        "patches": [],
+        "proprietary": false,
+        "publicationTime": "2021-04-06T13:57:02.482219Z",
+        "references": [
+          {
+            "title": "GitHub Commit",
+            "url": "https://github.com/django/django/commit/2820fd1be5dfccbf1216c3845fad8580502473e1"
+          },
+          {
+            "title": "GitHub Commit",
+            "url": "https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a454ca49c2"
+          },
+          {
+            "title": "GitHub Commit",
+            "url": "https://github.com/django/django/commit/cca0d98118cccf9ae0c6dcf2d6c57fc50469fbf0"
+          },
+          {
+            "title": "GitHub Commit",
+            "url": "https://github.com/django/django/commit/d4d800ca1addc4141e03c5440a849bb64d1582cd"
+          },
+          {
+            "title": "GitHub Commit",
+            "url": "https://github.com/django/django/commit/e7fba62248f604c76da4f23dcf1db4a57b0808ea"
+          }
+        ],
+        "semver": {
+          "vulnerable": [
+            "[2.2, 2.2.20)",
+            "[3.0, 3.0.14)",
+            "[3.1, 3.1.8)"
+          ]
+        },
+        "severity": "low",
+        "severityWithCritical": "low",
+        "title": "Directory Traversal",
+        "from": [
+          "app-with-already-fixed@0.0.0",
+          "django@2.2.18"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": true,
+        "name": "django",
+        "version": "2.2.18"
+      },
+      {
+        "CVSSv3": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+        "alternativeIds": [],
+        "creationTime": "2021-05-04T12:51:50.753891Z",
+        "credit": [
+          "Jasu Viding"
+        ],
+        "cvssScore": 3.3,
+        "description": "## Overview\n[django](https://pypi.org/project/Django/) is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.\n\nAffected versions of this package are vulnerable to Directory Traversal. `MultiPartParser`, `UploadedFile`, and `FieldFile` allow directory-traversal via uploaded files with suitably crafted file names.\n\n## Details\n\nA Directory Traversal attack (also known as path traversal) aims to access files and directories that are stored outside the intended folder. By manipulating files with \"dot-dot-slash (../)\" sequences and its variations, or by using absolute file paths, it may be possible to access arbitrary files and directories stored on file system, including application source code, configuration, and other critical system files.\n\nDirectory Traversal vulnerabilities can be generally divided into two types:\n\n- **Information Disclosure**: Allows the attacker to gain information about the folder structure or read the contents of sensitive files on the system.\n\n`st` is a module for serving static files on web pages, and contains a [vulnerability of this type](https://snyk.io/vuln/npm:st:20140206). In our example, we will serve files from the `public` route.\n\nIf an attacker requests the following URL from our server, it will in turn leak the sensitive private key of the root user.\n\n```\ncurl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa\n```\n**Note** `%2e` is the URL encoded version of `.` (dot).\n\n- **Writing arbitrary files**: Allows the attacker to create or replace existing files. This type of vulnerability is also known as `Zip-Slip`. \n\nOne way to achieve this is by using a malicious `zip` archive that holds path traversal filenames. When each filename in the zip archive gets concatenated to the target extraction folder, without validation, the final path ends up outside of the target folder. If an executable or a configuration file is overwritten with a file containing malicious code, the problem can turn into an arbitrary code execution issue quite easily.\n\nThe following is an example of a `zip` archive with one benign file and one malicious file. Extracting the malicious file will result in traversing out of the target folder, ending up in `/root/.ssh/` overwriting the `authorized_keys` file:\n\n```\n2018-04-15 22:04:29 .....           19           19  good.txt\n2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys\n```\n\n## Remediation\nUpgrade `django` to version 2.2.21, 3.1.9, 3.2.1 or higher.\n## References\n- [Django Advisory](https://www.djangoproject.com/weblog/2021/may/04/security-releases/)\n- [GitHub Commit](https://github.com/django/django/commit/c98f446c188596d4ba6de71d1b77b4a6c5c2a007)\n",
+        "disclosureTime": "2021-05-04T12:44:10Z",
+        "exploit": "Not Defined",
+        "fixedIn": [
+          "2.2.21",
+          "3.1.9",
+          "3.2.1"
+        ],
+        "functions": [],
+        "functions_new": [],
+        "id": "SNYK-PYTHON-DJANGO-1279042",
+        "identifiers": {
+          "CVE": [
+            "CVE-2021-31542"
+          ],
+          "CWE": [
+            "CWE-22"
+          ]
+        },
+        "language": "python",
+        "modificationTime": "2021-05-04T14:45:09.894750Z",
+        "moduleName": "django",
+        "packageManager": "pip",
+        "packageName": "django",
+        "patches": [],
+        "proprietary": false,
+        "publicationTime": "2021-05-04T14:45:10.137628Z",
+        "references": [
+          {
+            "title": "Django Advisory",
+            "url": "https://www.djangoproject.com/weblog/2021/may/04/security-releases/"
+          },
+          {
+            "title": "GitHub Commit",
+            "url": "https://github.com/django/django/commit/c98f446c188596d4ba6de71d1b77b4a6c5c2a007"
+          }
+        ],
+        "semver": {
+          "vulnerable": [
+            "[, 2.2.21)",
+            "[3.0, 3.1.9)",
+            "[3.2, 3.2.1)"
+          ]
+        },
+        "severity": "low",
+        "severityWithCritical": "low",
+        "title": "Directory Traversal",
+        "from": [
+          "app-with-already-fixed@0.0.0",
+          "django@2.2.18"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": true,
+        "name": "django",
+        "version": "2.2.18"
+      },
+      {
+        "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+        "alternativeIds": [],
+        "creationTime": "2021-05-06T14:52:58.420987Z",
+        "credit": [
+          "Unknown"
+        ],
+        "cvssScore": 7.3,
+        "description": "## Overview\n[django](https://pypi.org/project/Django/) is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.\n\nAffected versions of this package are vulnerable to HTTP Header Injection. In Python 3.9.5+ urllib.parse() automatically removes ASCII newlines and tabs from URLs. Unfortunately it created an issue in the URLValidator. URLValidator uses `urllib.urlsplit()` and `urllib.urlunsplit()` for creating a URL variant with Punycode which no longer contains newlines and tabs in Python 3.9.5+. As a consequence, the regular expression matched the URL (without unsafe characters) and the source value (with unsafe characters) was considered valid.\r\n\r\nThis issue was introduced by the [bpo-43882](https://bugs.python.org/issue43882) fix.\n## Remediation\nUpgrade `django` to version 3.2.2, 3.1.10, 2.2.22 or higher.\n## References\n- [Django Security Releases](https://www.djangoproject.com/weblog/2021/may/06/security-releases/)\n- [GitHub Commit](https://github.com/django/django/commit/e1e81aa1c4427411e3c68facdd761229ffea6f6f)\n- [GitHub PR](https://github.com/django/django/pull/14360)\n- [Mail Archive](https://www.mail-archive.com/debian-bugs-dist@lists.debian.org/msg1804086.html)\n",
+        "disclosureTime": "2021-05-06T14:44:15Z",
+        "exploit": "Not Defined",
+        "fixedIn": [
+          "2.2.22",
+          "3.1.10",
+          "3.2.2"
+        ],
+        "functions": [],
+        "functions_new": [],
+        "id": "SNYK-PYTHON-DJANGO-1290072",
+        "identifiers": {
+          "CVE": [
+            "CVE-2021-32052"
+          ],
+          "CWE": [
+            "CWE-644"
+          ]
+        },
+        "language": "python",
+        "modificationTime": "2021-05-06T15:41:43.922301Z",
+        "moduleName": "django",
+        "packageManager": "pip",
+        "packageName": "django",
+        "patches": [],
+        "proprietary": false,
+        "publicationTime": "2021-05-06T15:41:44.175836Z",
+        "references": [
+          {
+            "title": "Django Security Releases",
+            "url": "https://www.djangoproject.com/weblog/2021/may/06/security-releases/"
+          },
+          {
+            "title": "GitHub Commit",
+            "url": "https://github.com/django/django/commit/e1e81aa1c4427411e3c68facdd761229ffea6f6f"
+          },
+          {
+            "title": "GitHub PR",
+            "url": "https://github.com/django/django/pull/14360"
+          },
+          {
+            "title": "Mail Archive",
+            "url": "https://www.mail-archive.com/debian-bugs-dist@lists.debian.org/msg1804086.html"
+          }
+        ],
+        "semver": {
+          "vulnerable": [
+            "[3.2,3.2.2)",
+            "[3.0,3.1.10)",
+            "[,2.2.22)"
+          ]
+        },
+        "severity": "high",
+        "severityWithCritical": "high",
+        "title": "HTTP Header Injection",
+        "from": [
+          "app-with-already-fixed@0.0.0",
+          "django@2.2.18"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": true,
+        "name": "django",
+        "version": "2.2.18"
+      },
+      {
+        "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L/E:P",
+        "alternativeIds": [],
+        "creationTime": "2020-09-25T17:30:26.286074Z",
+        "credit": [
+          "Yeting Li"
+        ],
+        "cvssScore": 5.3,
+        "description": "## Overview\n[jinja2](https://pypi.org/project/Jinja2/) is a template engine written in pure Python. It provides a Django inspired non-XML syntax but supports inline expressions and an optional sandboxed environment.\n\nAffected versions of this package are vulnerable to Regular Expression Denial of Service (ReDoS). The ReDoS vulnerability is mainly due to the `_punctuation_re regex` operator and its use of multiple wildcards. The last wildcard is the most exploitable as it searches for trailing punctuation.\r\n\r\nThis issue can be mitigated by using Markdown to format user content instead of the urlize filter, or by implementing request timeouts or limiting process memory.\r\n\r\n### PoC by Yeting Li\r\n```\r\nfrom jinja2.utils import urlize\r\nfrom time import perf_counter\r\n\r\nfor i in range(3):\r\n    text = \"abc@\" + \".\" * (i+1)*5000 + \"!\"\r\n    LEN = len(text)\r\n    BEGIN = perf_counter()\r\n    urlize(text)\r\n    DURATION = perf_counter() - BEGIN\r\n    print(f\"{LEN}: took {DURATION} seconds!\")\r\n```\n\n## Details\n\nDenial of Service (DoS) describes a family of attacks, all aimed at making a system inaccessible to its original and legitimate users. There are many types of DoS attacks, ranging from trying to clog the network pipes to the system by generating a large volume of traffic from many machines (a Distributed Denial of Service - DDoS - attack) to sending crafted requests that cause a system to crash or take a disproportional amount of time to process.\n\nThe Regular expression Denial of Service (ReDoS) is a type of Denial of Service attack. Regular expressions are incredibly powerful, but they aren't very intuitive and can ultimately end up making it easy for attackers to take your site down.\n\nLet’s take the following regular expression as an example:\n```js\nregex = /A(B|C+)+D/\n```\n\nThis regular expression accomplishes the following:\n- `A` The string must start with the letter 'A'\n- `(B|C+)+` The string must then follow the letter A with either the letter 'B' or some number of occurrences of the letter 'C' (the `+` matches one or more times). The `+` at the end of this section states that we can look for one or more matches of this section.\n- `D` Finally, we ensure this section of the string ends with a 'D'\n\nThe expression would match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD` and `ACCCCCD`\n\nIt most cases, it doesn't take very long for a regex engine to find a match:\n\n```bash\n$ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n0.04s user 0.01s system 95% cpu 0.052 total\n\n$ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n1.79s user 0.02s system 99% cpu 1.812 total\n```\n\nThe entire process of testing it against a 30 characters long string takes around ~52ms. But when given an invalid string, it takes nearly two seconds to complete the test, over ten times as long as it took to test a valid string. The dramatic difference is due to the way regular expressions get evaluated.\n\nMost Regex engines will work very similarly (with minor differences). The engine will match the first possible way to accept the current character and proceed to the next one. If it then fails to match the next one, it will backtrack and see if there was another way to digest the previous character. If it goes too far down the rabbit hole only to find out the string doesn’t match in the end, and if many characters have multiple valid regex paths, the number of backtracking steps can become very large, resulting in what is known as _catastrophic backtracking_.\n\nLet's look at how our expression runs into this problem, using a shorter string: \"ACCCX\". While it seems fairly straightforward, there are still four different ways that the engine could match those three C's:\n1. CCC\n2. CC+C\n3. C+CC\n4. C+C+C.\n\nThe engine has to try each of those combinations to see if any of them potentially match against the expression. When you combine that with the other steps the engine must take, we can use [RegEx 101 debugger](https://regex101.com/debugger) to see the engine has to take a total of 38 steps before it can determine the string doesn't match.\n\nFrom there, the number of steps the engine must use to validate a string just continues to grow.\n\n| String | Number of C's | Number of steps |\n| -------|-------------:| -----:|\n| ACCCX | 3 | 38\n| ACCCCX | 4 | 71\n| ACCCCCX | 5 | 136\n| ACCCCCCCCCCCCCCX | 14 | 65,553\n\n\nBy the time the string includes 14 C's, the engine has to take over 65,000 steps just to see if the string is valid. These extreme situations can cause them to work very slowly (exponentially related to input size, as shown above), allowing an attacker to exploit this and can cause the service to excessively consume CPU, resulting in a Denial of Service.\n\n## Remediation\nUpgrade `jinja2` to version 2.11.3 or higher.\n## References\n- [GitHub Additional Information](https://github.com/pallets/jinja/blob/ab81fd9c277900c85da0c322a2ff9d68a235b2e6/src/jinja2/utils.py#L20)\n- [GitHub PR](https://github.com/pallets/jinja/pull/1343)\n",
+        "disclosureTime": "2020-09-25T17:29:19Z",
+        "exploit": "Proof of Concept",
+        "fixedIn": [
+          "2.11.3"
+        ],
+        "functions": [],
+        "functions_new": [],
+        "id": "SNYK-PYTHON-JINJA2-1012994",
+        "identifiers": {
+          "CVE": [
+            "CVE-2020-28493"
+          ],
+          "CWE": [
+            "CWE-400"
+          ],
+          "GHSA": [
+            "GHSA-g3rq-g295-4j3m"
+          ]
+        },
+        "language": "python",
+        "modificationTime": "2021-02-01T19:52:16.877030Z",
+        "moduleName": "jinja2",
+        "packageManager": "pip",
+        "packageName": "jinja2",
+        "patches": [],
+        "proprietary": true,
+        "publicationTime": "2021-02-01T19:52:17Z",
+        "references": [
+          {
+            "title": "GitHub Additional Information",
+            "url": "https://github.com/pallets/jinja/blob/ab81fd9c277900c85da0c322a2ff9d68a235b2e6/src/jinja2/utils.py%23L20"
+          },
+          {
+            "title": "GitHub PR",
+            "url": "https://github.com/pallets/jinja/pull/1343"
+          }
+        ],
+        "semver": {
+          "vulnerable": [
+            "[,2.11.3)"
+          ]
+        },
+        "severity": "medium",
+        "severityWithCritical": "medium",
+        "title": "Regular Expression Denial of Service (ReDoS)",
+        "from": [
+          "app-with-already-fixed@0.0.0",
+          "jinja2@2.7.2"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": true,
+        "name": "jinja2",
+        "version": "2.7.2"
+      },
+      {
+        "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:L/I:L/A:L/RL:O",
+        "alternativeIds": [],
+        "creationTime": "2019-04-07T10:24:16.310959Z",
+        "credit": [
+          "Unknown"
+        ],
+        "cvssScore": 6,
+        "description": "## Overview\n[jinja2](https://pypi.org/project/Jinja2/) is a template engine written in pure Python. It provides a Django inspired non-XML syntax but supports inline expressions and an optional sandboxed environment.\n\nAffected versions of this package are vulnerable to Sandbox Escape via the `str.format_map`.\n## Remediation\nUpgrade `jinja2` to version 2.10.1 or higher.\n## References\n- [Release Notes](https://palletsprojects.com/blog/jinja-2-10-1-released)\n",
+        "disclosureTime": "2019-04-07T00:42:43Z",
+        "exploit": "Not Defined",
+        "fixedIn": [
+          "2.10.1"
+        ],
+        "functions": [],
+        "functions_new": [],
+        "id": "SNYK-PYTHON-JINJA2-174126",
+        "identifiers": {
+          "CVE": [
+            "CVE-2019-10906"
+          ],
+          "CWE": [
+            "CWE-265"
+          ]
+        },
+        "language": "python",
+        "modificationTime": "2020-06-12T14:36:55.661596Z",
+        "moduleName": "jinja2",
+        "packageManager": "pip",
+        "packageName": "jinja2",
+        "patches": [],
+        "proprietary": false,
+        "publicationTime": "2019-04-07T00:42:43Z",
+        "references": [
+          {
+            "title": "Release Notes",
+            "url": "https://palletsprojects.com/blog/jinja-2-10-1-released"
+          }
+        ],
+        "semver": {
+          "vulnerable": [
+            "[,2.10.1)"
+          ]
+        },
+        "severity": "medium",
+        "severityWithCritical": "medium",
+        "title": "Sandbox Escape",
+        "from": [
+          "app-with-already-fixed@0.0.0",
+          "jinja2@2.7.2"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": true,
+        "name": "jinja2",
+        "version": "2.7.2"
+      },
+      {
+        "CVSSv3": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:L",
+        "alternativeIds": [],
+        "creationTime": "2017-05-28T08:29:50.295000Z",
+        "credit": [
+          "Arun Babu Neelicattu"
+        ],
+        "cvssScore": 5.3,
+        "description": "## Overview\r\n[`jinja2`](https://pypi.python.org/pypi/jinja2) is a small but fast and easy to use stand-alone template engine written in pure python.\r\nFileSystemBytecodeCache in Jinja2 2.7.2 does not properly create temporary directories, which allows local users to gain privileges by pre-creating a temporary directory with a user's uid.\r\n\r\n**NOTE:** this vulnerability exists because of an incomplete fix for [CVE-2014-1402](https://snyk.io/vulnSNYK-PYTHON-JINJA2-40028).\r\n\r\n## References\r\n- [NVD](https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0012)\r\n- [Bugzilla redhat](https://bugzilla.redhat.com/show_bug.cgi?id=1051421)\r\n- [GitHub PR #1](https://github.com/mitsuhiko/jinja2/pull/292)\r\n- [GitHub PR #2](https://github.com/mitsuhiko/jinja2/pull/296)\r\n- [GitHub Commit](https://github.com/mitsuhiko/jinja2/commit/acb672b6a179567632e032f547582f30fa2f4aa7)\r\n",
+        "disclosureTime": "2014-01-18T05:33:40.101000Z",
+        "exploit": "Not Defined",
+        "fixedIn": [],
+        "functions": [],
+        "functions_new": [],
+        "id": "SNYK-PYTHON-JINJA2-40250",
+        "identifiers": {
+          "CVE": [
+            "CVE-2014-0012"
+          ],
+          "CWE": [
+            "CWE-264"
+          ]
+        },
+        "language": "python",
+        "modificationTime": "2019-02-17T08:46:41.648104Z",
+        "moduleName": "jinja2",
+        "packageManager": "pip",
+        "packageName": "jinja2",
+        "patches": [],
+        "proprietary": false,
+        "publicationTime": "2014-01-18T05:33:40.101000Z",
+        "references": [
+          {
+            "title": "GitHub Commit",
+            "url": "https://github.com/mitsuhiko/jinja2/commit/acb672b6a179567632e032f547582f30fa2f4aa7"
+          },
+          {
+            "title": "GitHub PR",
+            "url": "https://github.com/mitsuhiko/jinja2/pull/292"
+          },
+          {
+            "title": "GitHub PR",
+            "url": "https://github.com/mitsuhiko/jinja2/pull/296"
+          },
+          {
+            "title": "NVD",
+            "url": "https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0012"
+          },
+          {
+            "title": "RedHat Bugzilla Bug",
+            "url": "https://bugzilla.redhat.com/show_bug.cgi?id=1051421"
+          }
+        ],
+        "semver": {
+          "vulnerable": [
+            "[2.7.2]"
+          ]
+        },
+        "severity": "medium",
+        "severityWithCritical": "medium",
+        "title": "Privilege Escalation",
+        "from": [
+          "app-with-already-fixed@0.0.0",
+          "jinja2@2.7.2"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": false,
+        "name": "jinja2",
+        "version": "2.7.2"
+      },
+      {
+        "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N",
+        "alternativeIds": [],
+        "creationTime": "2019-07-29T13:28:48.288799Z",
+        "credit": [
+          "Unknown"
+        ],
+        "cvssScore": 8.6,
+        "description": "## Overview\n[jinja2](https://pypi.org/project/Jinja2/) is a template engine written in pure Python. It provides a Django inspired non-XML syntax but supports inline expressions and an optional sandboxed environment.\n\nAffected versions of this package are vulnerable to Sandbox Bypass. Users were allowed to insert `str.format` through web templates, leading to an escape from sandbox.\n## Remediation\nUpgrade `jinja2` to version 2.8.1 or higher.\n## References\n- [GitHub Commit](https://github.com/pallets/jinja/commit/9b53045c34e61013dc8f09b7e52a555fa16bed16)\n",
+        "disclosureTime": "2016-12-29T13:27:18Z",
+        "exploit": "Not Defined",
+        "fixedIn": [
+          "2.8.1"
+        ],
+        "functions": [],
+        "functions_new": [],
+        "id": "SNYK-PYTHON-JINJA2-455616",
+        "identifiers": {
+          "CVE": [
+            "CVE-2016-10745"
+          ],
+          "CWE": [
+            "CWE-234"
+          ]
+        },
+        "language": "python",
+        "modificationTime": "2020-06-12T14:36:58.461729Z",
+        "moduleName": "jinja2",
+        "packageManager": "pip",
+        "packageName": "jinja2",
+        "patches": [],
+        "proprietary": false,
+        "publicationTime": "2019-07-30T13:11:16Z",
+        "references": [
+          {
+            "title": "GitHub Commit",
+            "url": "https://github.com/pallets/jinja/commit/9b53045c34e61013dc8f09b7e52a555fa16bed16"
+          }
+        ],
+        "semver": {
+          "vulnerable": [
+            "[2.5, 2.8.1)"
+          ]
+        },
+        "severity": "high",
+        "severityWithCritical": "high",
+        "title": "Sandbox Bypass",
+        "from": [
+          "app-with-already-fixed@0.0.0",
+          "jinja2@2.7.2"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": true,
+        "name": "jinja2",
+        "version": "2.7.2"
+      },
+      {
+        "license": "MIT",
+        "semver": {
+          "vulnerable": [
+            "[2005a,)"
+          ]
+        },
+        "id": "snyk:lic:pip:pytz:MIT",
+        "type": "license",
+        "packageManager": "pip",
+        "language": "python",
+        "packageName": "pytz",
+        "title": "MIT license",
+        "description": "MIT license",
+        "publicationTime": "2021-05-23T11:15:36.845Z",
+        "creationTime": "2021-05-23T11:15:36.845Z",
+        "patches": [],
+        "licenseTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list/master/MIT.txt",
+        "severity": "high",
+        "legalInstructionsArray": [
+          {
+            "licenseName": "MIT",
+            "legalContent": "Not suitable to use, please find a different package."
+          }
+        ],
+        "from": [
+          "app-with-already-fixed@0.0.0",
+          "django@2.2.18",
+          "pytz@2021.1"
+        ],
+        "upgradePath": [],
+        "isUpgradable": false,
+        "isPatchable": false,
+        "isPinnable": false,
+        "name": "pytz",
+        "version": "2021.1"
+      }
+    ],
+    "upgrade": {},
+    "patch": {},
+    "ignore": {},
+    "pin": {
+      "django@2.2.18": {
+        "upgradeTo": "django@2.2.19",
+        "vulns": [
+          "SNYK-PYTHON-DJANGO-1076802",
+          "SNYK-PYTHON-DJANGO-1090612",
+          "SNYK-PYTHON-DJANGO-1279042",
+          "SNYK-PYTHON-DJANGO-1290072"
+        ],
+        "isTransitive": false
+      },
+      "jinja2@2.7.2": {
+        "upgradeTo": "jinja2@2.11.3",
+        "vulns": [
+          "SNYK-PYTHON-JINJA2-1012994",
+          "SNYK-PYTHON-JINJA2-174126",
+          "SNYK-PYTHON-JINJA2-455616"
+        ],
+        "isTransitive": false
+      }
+    }
+  },
+  "filesystemPolicy": false,
+  "filtered": {
+    "ignore": [],
+    "patch": []
+  },
+  "uniqueCount": 9,
+  "projectName": "app-with-already-fixed",
+  "foundProjectCount": 2,
+  "displayTargetFile": "requirements.txt",
+  "path": "/Users/snyk/pip-requirements/app-with-already-fixed"
+}

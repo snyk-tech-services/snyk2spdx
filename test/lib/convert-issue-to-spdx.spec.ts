@@ -16,5 +16,12 @@ describe('convertIs', () => {
       id: 'SNYK-RUBY-JSON-560838',
     });
   });
-  it.todo('license issue is not converted to a vulnerability');
+  it.skip('license issue is not converted to a vulnerability', () => {
+    const licenseIssue = loadJson(
+      pathLib.resolve(__dirname, '../', 'fixtures/single-license-issue.json'),
+    );
+    expect(() => {
+      convertSnykIssueToSpdx(licenseIssue);
+    }).toThrow();
+  });
 });
