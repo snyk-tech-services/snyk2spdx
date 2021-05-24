@@ -6,7 +6,7 @@ import { convertSnykTestOutputToSPDX } from '../../src';
 function loadJson(filename: string): JSON {
   return JSON.parse(readFileSync(filename, 'utf-8'));
 }
-describe('Correctly converts vulnerabilities', () => {
+describe('convertSnykTestOutputToSPDX', () => {
   it('No Snyk vulnerabilities converted to SPDX v3 correctly', async () => {
     const snykTestData = loadJson(
       pathLib.resolve(__dirname, '../', 'fixtures/no-deps.json'),
