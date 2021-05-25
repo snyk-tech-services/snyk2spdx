@@ -25,6 +25,7 @@ jobs:
         steps:
             - checkout
             - run: npm install
+            - run: npm lint
             - run: npm test
             - snyk/scan:
                 fail-on-issues: true
