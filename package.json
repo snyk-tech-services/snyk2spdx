@@ -1,6 +1,6 @@
 {
   "name": "snyk2spdx",
-  "description": "Convert the Snyk CLI ouput to SPDX format output",
+  "description": "Convert the Snyk CLI output to SPDX format output",
   "main": "dist/index.js",
   "scripts": {
     "format:check": "prettier --check '{''{src,test}/!(fixtures)/**/*,*}.{js,ts,json,yml}'",
