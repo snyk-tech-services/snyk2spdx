@@ -2,37 +2,34 @@ import { readFileSync } from 'fs';
 import * as pathLib from 'path';
 
 import { convertSnykTestOutputToSPDX } from '../../src';
+import { SnykTestOutput } from '../../src/types';
 
-function loadJson(filename: string): JSON {
+function loadJson<JsonFormat>(filename: string): JsonFormat {
   return JSON.parse(readFileSync(filename, 'utf-8'));
 }
 describe('convertSnykTestOutputToSPDX', () => {
   it('No Snyk vulnerabilities converted to SPDX v3 correctly', async () => {
-    const snykTestData = loadJson(
+    const snykTestData = loadJson<SnykTestOutput>(
       pathLib.resolve(__dirname, '../', 'fixtures/no-deps.json'),
     );
     const res = convertSnykTestOutputToSPDX(snykTestData);
-    // TODO: uncomment once working & update
-    // expect(res).toMatch({
-    //   id: 'TODOSPDXRef-no-prod-deps',
-    //   name: 'no-prod-deps',
-    //   specVersion: 'SPDX-3.0',
-    //   // TODO: profile: Profile[];
-    //   created: expect.any(String),
-    //   documentNamespace:
-    //     'http://[CreatorWebsite]/[pathToSpdx]/[DocumentName]-[UUID]',
-    //   // License expression for dataLicense.  Compliance with the SPDX specification includes populating the SPDX fields therein with data related to such fields (\"SPDX-Metadata\"). The SPDX specification contains numerous fields where an SPDX document creator may provide relevant explanatory text in SPDX-Metadata. Without opining on the lawfulness of \"database rights\" (in jurisdictions where applicable), such explanatory text is copyrightable subject matter in most Berne Convention countries. By using the SPDX specification, or any portion hereof, you hereby agree that any copyright rights (as determined by your jurisdiction) in any SPDX-Metadata, including without limitation explanatory text, shall be subject to the terms of the Creative Commons CC0 1.0 Universal license. For SPDX-Metadata not containing any copyright rights, you hereby agree and acknowledge that the SPDX-Metadata is provided to you \"as-is\" and without any representations or warranties of any kind concerning the SPDX-Metadata, express, implied, statutory or otherwise, including without limitation warranties of title, merchantability, fitness for a particular purpose, non-infringement, or the absence of latent or other defects, accuracy, or the presence or absence of errors, whether or not discoverable, all to the greatest extent permissible under applicable law.
-    //   dataLicense: 'TODO',
-    //   creator: 'Organization: Snyk Ltd',
-    //   comment: 'TODO',
-    //   description: 'TODO',
-    //   vulnerabilities: [],
-    // });
-
-    expect(res.vulnerabilities as any).toEqual([]);
+    expect(res).toMatchObject({
+      id: 'SPDXRef-no-prod-deps',
+      name: 'no-prod-deps',
+      specVersion: '3.0-alpha',
+      profile: ['base', 'vulnerabilities'],
+      created: expect.any(String),
+      documentNamespace: 'TODO',
+      dataLicense: 'TODO',
+      creator: 'Organization: Snyk Ltd',
+      comment: 'TODO',
+      description:
+        'Snyk test result for project no-prod-deps in SPDX SBOM format',
+      vulnerabilities: [],
+    });
   });
   it('Snyk issue is converted to SPDX v3 vulnerability', () => {
-    const snykTestData = loadJson(
+    const snykTestData = loadJson<SnykTestOutput>(
       pathLib.resolve(__dirname, '../', 'fixtures/ruby-vulnerabilities.json'),
     );
     const res = convertSnykTestOutputToSPDX(snykTestData);
@@ -51,7 +48,7 @@ describe('convertSnykTestOutputToSPDX', () => {
     );
   });
   it('license issues are not converted to vulnerabilities', () => {
-    const snykTestData = loadJson(
+    const snykTestData = loadJson<SnykTestOutput>(
       pathLib.resolve(__dirname, '../', 'fixtures/with-license-issues.json'),
     );
     const res = convertSnykTestOutputToSPDX(snykTestData);
