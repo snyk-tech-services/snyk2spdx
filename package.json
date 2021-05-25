@@ -1,5 +1,5 @@
 {
-  "name": "@snyk/snyk2spdx",
+  "name": "snyk2spdx",
   "description": "Convert the Snyk CLI ouput to SPDX format output",
   "main": "dist/index.js",
   "scripts": {
