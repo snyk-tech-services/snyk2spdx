@@ -1,1 +1,2 @@
 export { convertSnykTestOutputToSPDX } from './lib';
+
