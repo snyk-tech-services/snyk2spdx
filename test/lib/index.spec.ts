@@ -31,12 +31,12 @@ describe('convertSnykTestOutputToSPDX', () => {
     const snykTestData = loadJson<SnykTestOutput>(
       pathLib.resolve(__dirname, '../', 'fixtures/ruby-vulnerabilities.json'),
     );
-    const projectName = 'ruby-app';
+    // const projectName = 'ruby-app';
     const res = convertSnykTestOutputToSPDX(snykTestData);
     expect((res.vulnerabilities as any).sort()).toMatchSnapshot();
   });
   it('license issues are not converted to vulnerabilities', () => {
-    const projectName = 'app-with-already-fixed';
+    // const projectName = 'app-with-already-fixed';
     const snykTestData = loadJson<SnykTestOutput>(
       pathLib.resolve(__dirname, '../', 'fixtures/with-license-issues.json'),
     );
