@@ -33,30 +33,7 @@ describe('convertSnykTestOutputToSPDX', () => {
     );
     const projectName = 'ruby-app';
     const res = convertSnykTestOutputToSPDX(snykTestData);
-    expect(res).toMatchObject({
-      id: `SPDXRef-${projectName}`,
-      name: projectName,
-      specVersion: 'SPDX-3.0',
-      profile: ['base', 'vulnerabilities'],
-      created: expect.any(String),
-      documentNamespace: 'TODO',
-      dataLicense: 'CC0-1.0',
-      creator: 'Organization: Snyk Ltd',
-      description: `Snyk test result for project ${projectName} in SPDX SBOM format`,
-    });
-    expect((res.vulnerabilities as any).sort()).toEqual(
-      [
-        {
-          id: 'SNYK-RUBY-JSON-560838',
-        },
-        {
-          id: 'SNYK-RUBY-LYNX-20160',
-        },
-        {
-          id: 'SNYK-RUBY-LYNX-20161',
-        },
-      ].sort(),
-    );
+    expect((res.vulnerabilities as any).sort()).toMatchSnapshot();
   });
   it('license issues are not converted to vulnerabilities', () => {
     const projectName = 'app-with-already-fixed';
@@ -64,49 +41,7 @@ describe('convertSnykTestOutputToSPDX', () => {
       pathLib.resolve(__dirname, '../', 'fixtures/with-license-issues.json'),
     );
     const res = convertSnykTestOutputToSPDX(snykTestData);
-    expect(res).toMatchObject({
-      id: `SPDXRef-${projectName}`,
-      name: projectName,
-      specVersion: 'SPDX-3.0',
-      profile: ['base', 'vulnerabilities'],
-      created: expect.any(String),
-      documentNamespace: 'TODO',
-      dataLicense: 'CC0-1.0',
-      creator: 'Organization: Snyk Ltd',
-      description: `Snyk test result for project ${projectName} in SPDX SBOM format`,
-    });
-    expect((res.vulnerabilities as any).sort()).toEqual(
-      [
-        {
-          id: 'SNYK-PYTHON-DJANGO-1076802',
-        },
-        {
-          id: 'SNYK-PYTHON-DJANGO-1090612',
-        },
-        {
-          id: 'SNYK-PYTHON-DJANGO-1279042',
-        },
-        {
-          id: 'SNYK-PYTHON-DJANGO-1290072',
-        },
-        {
-          id: 'SNYK-PYTHON-JINJA2-1012994',
-        },
-        {
-          id: 'SNYK-PYTHON-JINJA2-174126',
-        },
-        {
-          id: 'SNYK-PYTHON-JINJA2-40250',
-        },
-        {
-          id: 'SNYK-PYTHON-JINJA2-455616',
-        },
-        // TODO: should not be here!
-        {
-          id: 'snyk:lic:pip:pytz:MIT',
-        },
-      ].sort(),
-    );
+    expect((res.vulnerabilities as any).sort()).toMatchSnapshot();
     // TODO: comment out once functionality in place
     // expect(
     //   (res.vulnerabilities as any).find(
