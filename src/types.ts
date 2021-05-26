@@ -1,7 +1,7 @@
 export interface SPDXv3 {
   id: string; //  e.g SPDXRef-document-name
   name: string;
-  specVersion: string; // SPDX-2.2 | SPDX-3.0
+  specVersion: SPDXSpecVersion; // SPDX-2.2 | SPDX-3.0
   profile: Profile[]; // TODO: ?? where is this from
   // YYYY-MM-DDThh:mm:ssZ
   created: string;
@@ -13,10 +13,13 @@ export interface SPDXv3 {
   // "Organization: organization" and optional "(email)"
   // "Tool: toolidentifier-version"
   creator: string;
-  comment: string;
   description: string;
   vulnerabilities: unknown;
 }
+
+type SPDXSpecVersions = '3.0' | '2.2';
+type SPDXSpecVersion = `SPDX-${SPDXSpecVersions}`;
+
 
 export enum Profile {
   'BASE' = 'base',
