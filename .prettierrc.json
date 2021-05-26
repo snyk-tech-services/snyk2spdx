@@ -2,5 +2,6 @@
   "arrowParens": "always",
   "trailingComma": "all",
   "singleQuote": true,
-  "htmlWhitespaceSensitivity": "ignore"
+  "htmlWhitespaceSensitivity": "ignore",
+  "tabWidth": 2
 }

@@ -22,7 +22,8 @@ function getVulnerabilityRating(
 function getExternalReferencesRelationships(
   references: allType.SnykIssueReference[],
 ): allType.ExternalReferencesRelationship[] {
-  let externalReferencesRelationship: allType.ExternalReferencesRelationship[] = [];
+  let externalReferencesRelationship: allType.ExternalReferencesRelationship[] =
+    [];
 
   externalReferencesRelationship = references
     ? references.map((step) => {
