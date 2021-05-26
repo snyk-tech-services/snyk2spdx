@@ -1,15 +1,15 @@
-import * as allType from '../types';
+import * as types from '../types';
 
 function getVulnerabilityRating(
-  issue: allType.SnykIssue,
-): allType.VulnerabilityRating[] {
-  const vulnerabilityRatingScore: allType.VulnerabilityRatingScore = {
-    base: issue.cvssScore ? issue.cvssScore.toString() : '',
+  issue: types.SnykIssue,
+): types.VulnerabilityRating[] {
+  const vulnerabilityRatingScore: types.VulnerabilityRatingScore = {
+    base: issue.cvssScore,
     exploitability: issue.exploit,
     impact: issue.semver.vulnerable[0],
   };
 
-  const vulnerabilityRating: allType.VulnerabilityRating = {
+  const vulnerabilityRating: types.VulnerabilityRating = {
     method: issue.CVSSv3 ? 'CVSS_3' : 'undefined', // must be CVSS_2, CVSS_3, OWASP_RISK or OTHER
     score: [vulnerabilityRatingScore],
     severity: issue.severity, // exploitability score of the vulnerability either None, Low, Medium, High or Critical
@@ -20,15 +20,15 @@ function getVulnerabilityRating(
 }
 
 function getExternalReferencesRelationships(
-  references: allType.SnykIssueReference[],
-): allType.ExternalReferencesRelationship[] {
-  let externalReferencesRelationship: allType.ExternalReferencesRelationship[] =
+  references: types.SnykIssueReference[],
+): types.ExternalReferencesRelationship[] {
+  let externalReferencesRelationship: types.ExternalReferencesRelationship[] =
     [];
 
   externalReferencesRelationship = references
     ? references.map((step) => {
         return {
-          category: '', // must be either ADVISORY, ARTICLE, FIX, REPORT or OTHER.
+          category: undefined, // not amndatory,but should be either ADVISORY, ARTICLE, FIX, REPORT or OTHER.
           locator: step.url, // url
         };
       })
@@ -38,18 +38,18 @@ function getExternalReferencesRelationships(
 }
 
 function getVulnerabilityExternalReferences(
-  issue: allType.SnykIssue,
-): allType.ExternalReference[] {
-  const externalReference: allType.ExternalReference = {
+  issue: types.SnykIssue,
+): types.ExternalReference[] {
+  const externalReference: types.ExternalReference = {
     externalReferencesRelationships: getExternalReferencesRelationships(
       issue.references,
     ),
     modified: issue.modificationTime, // YYYY-MM-DDThh:mm:ssZ
     published: issue.publicationTime,
-    withdrawn: '', // TODO I don't know where to find this one
+    withdrawn: undefined, // not mandatory, setting at undefined
   };
 
-  const externalReferences: allType.ExternalReference[] = [externalReference];
+  const externalReferences: types.ExternalReference[] = [externalReference];
 
   return externalReferences;
 }
@@ -59,7 +59,7 @@ function getCwes(cwe: string[]): number[] {
 
   cwes = cwe
     ? cwe.map((step) => {
-        return parseInt(step.slice(4, step.length));
+        return parseInt(step.replace('CWE-', ''));
       })
     : [];
 
@@ -67,32 +67,32 @@ function getCwes(cwe: string[]): number[] {
 }
 
 function getVulnerabilityRelationship(
-  issue: allType.SnykIssue,
-): allType.VulnerabilityRelationship[] {
-  const vulnerabilityAffect: allType.AffectedBy = {
+  issue: types.SnykIssue,
+): types.VulnerabilityRelationship[] {
+  const vulnerabilityAffect: types.AffectedBy = {
     to: issue.from,
     type: 'AFFECTS',
   };
 
-  const vulnerabilityfoundBy: allType.AffectedBy = {
+  const vulnerabilityfoundBy: types.AffectedBy = {
     to: issue.credit,
     type: 'FOUND_BY',
   };
 
   // not mandatory, unclear what should be in here
-  const vulnerabilitySuppliedBy: allType.AffectedBy = {
+  const vulnerabilitySuppliedBy: types.AffectedBy = {
     to: issue.credit,
     type: 'SUPPLIED_BY',
   };
 
-  const ratedBy: allType.RatedBy = {
-    cwes: getCwes(issue.cwe),
+  const ratedBy: types.RatedBy = {
+    cwes: issue.identifiers ? getCwes(issue.identifiers.CWE) : [],
     rating: getVulnerabilityRating(issue),
-    to: issue.credit, // TODO: we might need to get that one reviewed, doc is unclear
+    to: issue.credit,
     type: 'RATED_BY',
   };
 
-  const relationship: allType.VulnerabilityRelationship[] = [
+  const relationship: types.VulnerabilityRelationship[] = [
     {
       affect: vulnerabilityAffect,
       foundBy: vulnerabilityfoundBy,
@@ -104,7 +104,7 @@ function getVulnerabilityRelationship(
   return relationship;
 }
 
-export function convertSnykIssueToSpdx(issue: any): allType.Vulnerability {
+export function convertSnykIssueToSpdx(issue: any): types.Vulnerability {
   return {
     id: issue.id,
     name: issue.id,

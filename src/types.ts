@@ -69,16 +69,16 @@ export interface VulnerabilityRating {
 }
 
 export interface VulnerabilityRatingScore {
-  base: string;
-  exploitability: string;
-  impact: string;
-}
-
+      base: number;
+      exploitability: string;
+      impact: string;
+  }
+  
 export interface ExternalReferencesRelationship {
-  category: string; // must be either ADVISORY, ARTICLE, FIX, REPORT or OTHER.
-  locator: string; // url
-}
-
+      category: string | undefined // must be either ADVISORY, ARTICLE, FIX, REPORT or OTHER.
+      locator: string // url
+  }
+  
 export interface ExternalReference {
   externalReferencesRelationships: ExternalReferencesRelationship[];
   modified?: string; // YYYY-MM-DDThh:mm:ssZ
@@ -134,9 +134,8 @@ interface ProfileVulnerability {
 
 export interface SnykIssue {
   id: string;
-  cwe: string[];
-  title: string;
-  description: string;
+  title : string;
+  description : string;
   from: string[];
   credit: string[];
   cvssScore: number;
@@ -148,6 +147,7 @@ export interface SnykIssue {
   publicationTime: string;
   references: SnykIssueReference[];
   creationTime: string;
+  identifiers: SnykIssueIdentifiers;
 }
 
 export interface SnykIssueSemver {
@@ -210,16 +210,6 @@ export interface DependencyPins {
 export interface PinRemediation extends UpgradeVulns {
   isTransitive: boolean;
 }
-// TODO: add more as needed
-// add only fields needed for conversion
-export interface SnykIssue {
-  id: string;
-  title: string;
-  description: string;
-  from: string[];
-  credit: string[];
-  identifiers: SnykIssueIdentifiers[];
-}
 
 interface SnykIssueIdentifiers {
   ALTERNATIVE?: string[];
@@ -228,6 +218,3 @@ interface SnykIssueIdentifiers {
   NSP?: number;
 }
 
-export interface SnykTestOutput {
-  vulnerabilities: SnykIssue[];
-}
