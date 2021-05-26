@@ -73,13 +73,13 @@ Upgrade \`json\` to version 2.3.0 or higher.
     Object {
       "externalReferencesRelationships": Array [
         Object {
-          "category": "",
+          "category": undefined,
           "locator": "https://www.ruby-lang.org/en/news/2020/03/19/json-dos-cve-2020-10663/",
         },
       ],
       "modified": "2020-06-12T14:37:02.660300Z",
       "published": "2020-03-19T16:04:21Z",
-      "withdrawn": "",
+      "withdrawn": undefined,
     },
   ],
   "id": "SNYK-RUBY-JSON-560838",
@@ -100,13 +100,15 @@ Upgrade \`json\` to version 2.3.0 or higher.
         "type": "FOUND_BY",
       },
       "ratedBy": Object {
-        "cwes": Array [],
+        "cwes": Array [
+          400,
+        ],
         "rating": Array [
           Object {
             "method": "CVSS_3",
             "score": Array [
               Object {
-                "base": "9.3",
+                "base": 9.3,
                 "exploitability": "Not Defined",
                 "impact": "<2.3.0",
               },
