@@ -6,12 +6,11 @@ export function convertSnykTestOutputToSPDX(data: SnykTestOutput): SPDXv3 {
   return {
     id: `SPDXRef-${data.projectName}`,
     name: data.projectName,
-    specVersion: '3.0-alpha',
+    specVersion: 'SPDX-3.0',
     profile: [Profile.BASE, Profile.VULNERABILITIES],
-    dataLicense: 'TODO',
+    dataLicense: 'CC0-1.0',
     creator: 'Organization: Snyk Ltd',
-    documentNamespace: 'TODO',
-    comment: 'TODO',
+    documentNamespace: 'TODO', // TODO: maybe file path?
     description: `Snyk test result for project ${data.projectName} in SPDX SBOM format`,
     created: Date.now().toString(),
     vulnerabilities: data.vulnerabilities.map((i: SnykIssue) =>
