@@ -10,6 +10,7 @@ jobs:
             - run: npm install semantic-release @semantic-release/exec pkg --save-dev --legacy-peer-deps
             - run: npm install
             - run: npm test
+            - run: npm run test:system
             - snyk/scan:
                 fail-on-issues: true
                 monitor-on-build: true
@@ -27,6 +28,7 @@ jobs:
             - run: npm install
             - run: npm run lint
             - run: npm test
+            - run: npm run test:system
             - snyk/scan:
                 fail-on-issues: true
                 monitor-on-build: false
@@ -43,6 +45,7 @@ jobs:
             - checkout
             - run: npm install
             - run: npm test
+            - run: npm run test:system
             - run: npx tsc
 workflows:
     version: 2

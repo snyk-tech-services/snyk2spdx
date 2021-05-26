@@ -1,16 +1,12 @@
-import { readFileSync } from 'fs';
 import * as pathLib from 'path';
 
-import { convertSnykTestOutputToSPDX } from '../../src';
-import { SnykTestOutput } from '../../src/types';
-
-function loadJson<JsonFormat>(filename: string): JsonFormat {
-  return JSON.parse(readFileSync(filename, 'utf-8'));
-}
+import { convertSnykTestOutputToSPDX } from '../../../src';
+import { SnykTestOutput } from '../../../src/types';
+import { loadJson } from '../../load-json';
 describe('convertSnykTestOutputToSPDX', () => {
   it('No Snyk vulnerabilities converted to SPDX v3 correctly', async () => {
     const snykTestData = loadJson<SnykTestOutput>(
-      pathLib.resolve(__dirname, '../', 'fixtures/no-deps.json'),
+      pathLib.resolve(__dirname, '../../', 'fixtures/no-deps.json'),
     );
     const projectName = 'no-prod-deps';
     const res = convertSnykTestOutputToSPDX(snykTestData);
@@ -31,7 +27,11 @@ describe('convertSnykTestOutputToSPDX', () => {
   });
   it('Snyk issue is converted to SPDX v3 vulnerability', () => {
     const snykTestData = loadJson<SnykTestOutput>(
-      pathLib.resolve(__dirname, '../', 'fixtures/ruby-vulnerabilities.json'),
+      pathLib.resolve(
+        __dirname,
+        '../../',
+        'fixtures/ruby-vulnerabilities.json',
+      ),
     );
     const projectName = 'ruby-app';
     const res = convertSnykTestOutputToSPDX(snykTestData);
@@ -52,7 +52,7 @@ describe('convertSnykTestOutputToSPDX', () => {
   });
   it('license issues are not converted to vulnerabilities', () => {
     const snykTestData = loadJson<SnykTestOutput>(
-      pathLib.resolve(__dirname, '../', 'fixtures/with-license-issues.json'),
+      pathLib.resolve(__dirname, '../../', 'fixtures/with-license-issues.json'),
     );
     const projectName = 'app-with-already-fixed';
     const res = convertSnykTestOutputToSPDX(snykTestData);

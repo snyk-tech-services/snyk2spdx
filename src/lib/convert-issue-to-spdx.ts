@@ -104,7 +104,9 @@ function getVulnerabilityRelationship(
   return relationship;
 }
 
-export function convertSnykIssueToSpdx(issue: any): types.Vulnerability {
+export function convertSnykIssueToSpdx(
+  issue: types.SnykIssue,
+): types.Vulnerability {
   return {
     id: issue.id,
     name: issue.id,
