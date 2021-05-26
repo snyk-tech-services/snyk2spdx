@@ -23,6 +23,10 @@ function getExternalReferencesRelationships(
   references: types.SnykIssueReference[],
 ): types.ExternalReferencesRelationship[] {
   let externalReferencesRelationship: types.ExternalReferencesRelationship[] = [];
+  references: allType.SnykIssueReference[],
+): allType.ExternalReferencesRelationship[] {
+  let externalReferencesRelationship: allType.ExternalReferencesRelationship[] =
+    [];
 
   externalReferencesRelationship = references
     ? references.map((step) => {
