@@ -148,6 +148,7 @@ export interface SnykIssue {
   references: SnykIssueReference[];
   creationTime: string;
   identifiers: SnykIssueIdentifiers;
+  type : string | undefined;
 }
 
 export interface SnykIssueSemver {

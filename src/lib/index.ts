@@ -15,8 +15,8 @@ export function convertSnykTestOutputToSPDX(data: SnykTestOutput): SPDXv3 {
     documentNamespace: generateDocumentNameSpace(outputFileName),
     description: `Snyk test result for project ${data.projectName} in SPDX SBOM format`,
     created: Date.now().toString(),
-    vulnerabilities: data.vulnerabilities.map((i: SnykIssue) =>
-      convertSnykIssueToSpdx(i),
-    ),
+    vulnerabilities: data.vulnerabilities
+      .filter((i: SnykIssue) => i.type == undefined)
+      .map((i: SnykIssue) => convertSnykIssueToSpdx(i)),
   };
 }
