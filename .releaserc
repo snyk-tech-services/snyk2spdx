@@ -1,0 +1,76 @@
+{
+  "prepare": [
+    "@semantic-release/npm",
+    {
+      "//": "adds a file to identify a build as a standalone binary",
+      "path": "@semantic-release/exec",
+      "cmd": "echo '' > dist/STANDALONE"
+    },
+    {
+      "//": "build the macos",
+      "path": "@semantic-release/exec",
+      "cmd": "npx nexe@3.3.7 dist/index.js  -r './dist/**/*.js' -t mac-x64-10.21.0 -o  snyk2spdx-macos"
+    },
+    {
+      "//": "build the linux",
+      "path": "@semantic-release/exec",
+      "cmd": "npx nexe@3.3.7 dist/index.js  -r './dist/**/*.js' -t linux-x64-12.16.2 -o  snyk2spdx-linux"
+    },
+    {
+      "//": "build the windows binaries",
+      "path": "@semantic-release/exec",
+      "cmd": "npx nexe@3.3.7 dist/index.js  -r './dist/**/*.js' -t windows-x64-10.16.0 -o  snyk2spdx-win.exe"
+    },
+    {
+      "//": "shasum all binaries",
+      "path": "@semantic-release/exec",
+      "cmd": "shasum -a 256  snyk2spdx-linux >  snyk2spdx-linux.sha256 && shasum -a 256  snyk2spdx-macos >  snyk2spdx-macos.sha256 && shasum -a 256  snyk2spdx-win.exe >  snyk2spdx-win.exe.sha256"
+    },
+    {
+      "//": "removes the file we use to identify a build as a standalone binary",
+      "path": "@semantic-release/exec",
+      "cmd": "rm dist/STANDALONE"
+    }
+  ],
+  "publish": [
+    "@semantic-release/npm",
+    {
+      "path": "@semantic-release/github",
+      "assets": [
+        {
+          "path": "./ snyk2spdx-linux",
+          "name": " snyk2spdx-linux",
+          "label": " snyk2spdx-linux"
+        },
+        {
+          "path": "./ snyk2spdx-linux.sha256",
+          "name": " snyk2spdx-linux.sha256",
+          "label": " snyk2spdx-linux.sha256"
+        },
+        {
+          "path": "./ snyk2spdx-macos",
+          "name": " snyk2spdx-macos",
+          "label": " snyk2spdx-macos"
+        },
+        {
+          "path": "./ snyk2spdx-macos.sha256",
+          "name": " snyk2spdx-macos.sha256",
+          "label": " snyk2spdx-macos.sha256"
+        },
+        {
+          "path": "./ snyk2spdx-win.exe",
+          "name": " snyk2spdx-win.exe",
+          "label": " snyk2spdx-win.exe"
+        },
+        {
+          "path": "./ snyk2spdx-win.exe.sha256",
+          "name": " snyk2spdx-win.exe.sha256",
+          "label": " snyk2spdx-win.exe.sha256"
+        }
+      ]
+    }
+  ],
+  "branches": [
+    "main"
+  ]
+}
