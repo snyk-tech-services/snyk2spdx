@@ -71,19 +71,14 @@ Upgrade \`json\` to version 2.3.0 or higher.
 ",
   "externalReferences": Array [
     Object {
-      "externalReferencesRelationships": Array [
-        Object {
-          "category": "ADVISORY",
-          "locator": "https://www.ruby-lang.org/en/news/2020/03/19/json-dos-cve-2020-10663/",
-        },
-      ],
-      "modified": "2020-06-12T14:37:02.660300Z",
-      "published": "2020-03-19T16:04:21Z",
-      "withdrawn": undefined,
+      "category": "ADVISORY",
+      "locator": "https://www.ruby-lang.org/en/news/2020/03/19/json-dos-cve-2020-10663/",
     },
   ],
   "id": "SNYK-RUBY-JSON-560838",
+  "modified": "2020-06-12T14:37:02.660300Z",
   "name": "SNYK-RUBY-JSON-560838",
+  "published": "2020-03-19T16:04:21Z",
   "relationships": Array [
     Object {
       "affect": Object {
@@ -109,11 +104,11 @@ Upgrade \`json\` to version 2.3.0 or higher.
             "score": Array [
               Object {
                 "base": 9.3,
-                "exploitability": "Not Defined",
-                "impact": "<2.3.0",
+                "exploitability": null,
+                "impact": null,
               },
             ],
-            "severity": "high",
+            "severity": "High",
             "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:L/A:H",
           },
         ],

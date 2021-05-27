@@ -72,19 +72,14 @@ Upgrade \`json\` to version 2.3.0 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://www.ruby-lang.org/en/news/2020/03/19/json-dos-cve-2020-10663/",
-          },
-        ],
-        "modified": "2020-06-12T14:37:02.660300Z",
-        "published": "2020-03-19T16:04:21Z",
-        "withdrawn": undefined,
+        "category": "ADVISORY",
+        "locator": "https://www.ruby-lang.org/en/news/2020/03/19/json-dos-cve-2020-10663/",
       },
     ],
     "id": "SNYK-RUBY-JSON-560838",
+    "modified": "2020-06-12T14:37:02.660300Z",
     "name": "SNYK-RUBY-JSON-560838",
+    "published": "2020-03-19T16:04:21Z",
     "relationships": Array [
       Object {
         "affect": Object {
@@ -110,11 +105,11 @@ Upgrade \`json\` to version 2.3.0 or higher.
               "score": Array [
                 Object {
                   "base": 9.3,
-                  "exploitability": "Not Defined",
-                  "impact": "<2.3.0",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "high",
+              "severity": "High",
               "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:L/A:H",
             },
           ],
@@ -143,19 +138,14 @@ Affected versions of this gem are vulnerable to arbitrary command executions due
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "http://rubysec.com/advisories/OSVDB-108579",
-          },
-        ],
-        "modified": "2019-05-30T11:55:49.846131Z",
-        "published": "2014-06-29T21:00:00Z",
-        "withdrawn": undefined,
+        "category": "ADVISORY",
+        "locator": "http://rubysec.com/advisories/OSVDB-108579",
       },
     ],
     "id": "SNYK-RUBY-LYNX-20160",
+    "modified": "2019-05-30T11:55:49.846131Z",
     "name": "SNYK-RUBY-LYNX-20160",
+    "published": "2014-06-29T21:00:00Z",
     "relationships": Array [
       Object {
         "affect": Object {
@@ -181,11 +171,11 @@ Affected versions of this gem are vulnerable to arbitrary command executions due
               "score": Array [
                 Object {
                   "base": 5.6,
-                  "exploitability": "Not Defined",
-                  "impact": ">= 0",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "medium",
+              "severity": "Medium",
               "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
             },
           ],
@@ -214,19 +204,14 @@ Affected versions of this gem are vulnerable due to a flaw in \`command/basic.rb
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "http://rubysec.com/advisories/CVE-2014-5002",
-          },
-        ],
-        "modified": "2019-05-30T11:55:50.567117Z",
-        "published": "2014-06-29T21:00:00Z",
-        "withdrawn": undefined,
+        "category": "ADVISORY",
+        "locator": "http://rubysec.com/advisories/CVE-2014-5002",
       },
     ],
     "id": "SNYK-RUBY-LYNX-20161",
+    "modified": "2019-05-30T11:55:50.567117Z",
     "name": "SNYK-RUBY-LYNX-20161",
+    "published": "2014-06-29T21:00:00Z",
     "relationships": Array [
       Object {
         "affect": Object {
@@ -252,11 +237,11 @@ Affected versions of this gem are vulnerable due to a flaw in \`command/basic.rb
               "score": Array [
                 Object {
                   "base": 7.8,
-                  "exploitability": "Not Defined",
-                  "impact": ">= 0",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "high",
+              "severity": "High",
               "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
             },
           ],
@@ -294,27 +279,22 @@ Upgrade \`django\` to version 2.2.19, 3.0.13, 3.1.7 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://www.djangoproject.com/weblog/2021/feb/19/security-releases/",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/be8237c7cce24b06aabde0b97afce98ddabbe3b6",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://snyk.io/blog/cache-poisoning-in-popular-open-source-packages/",
-          },
-        ],
-        "modified": "2021-02-19T15:54:22.876737Z",
-        "published": "2021-02-19T15:54:23.197747Z",
-        "withdrawn": undefined,
+        "category": "ADVISORY",
+        "locator": "https://www.djangoproject.com/weblog/2021/feb/19/security-releases/",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/be8237c7cce24b06aabde0b97afce98ddabbe3b6",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://snyk.io/blog/cache-poisoning-in-popular-open-source-packages/",
       },
     ],
     "id": "SNYK-PYTHON-DJANGO-1076802",
+    "modified": "2021-02-19T15:54:22.876737Z",
     "name": "SNYK-PYTHON-DJANGO-1076802",
+    "published": "2021-02-19T15:54:23.197747Z",
     "relationships": Array [
       Object {
         "affect": Object {
@@ -340,11 +320,11 @@ Upgrade \`django\` to version 2.2.19, 3.0.13, 3.1.7 or higher.
               "score": Array [
                 Object {
                   "base": 5.9,
-                  "exploitability": "Not Defined",
-                  "impact": "[2.2,2.2.19)",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "medium",
+              "severity": "Medium",
               "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:N/I:L/A:H",
             },
           ],
@@ -408,35 +388,30 @@ Upgrade \`django\` to version 2.2.20, 3.0.14, 3.1.8 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/2820fd1be5dfccbf1216c3845fad8580502473e1",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a454ca49c2",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/cca0d98118cccf9ae0c6dcf2d6c57fc50469fbf0",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/d4d800ca1addc4141e03c5440a849bb64d1582cd",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/e7fba62248f604c76da4f23dcf1db4a57b0808ea",
-          },
-        ],
-        "modified": "2021-04-06T13:57:02.213825Z",
-        "published": "2021-04-06T13:57:02.482219Z",
-        "withdrawn": undefined,
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/2820fd1be5dfccbf1216c3845fad8580502473e1",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a454ca49c2",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/cca0d98118cccf9ae0c6dcf2d6c57fc50469fbf0",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/d4d800ca1addc4141e03c5440a849bb64d1582cd",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/e7fba62248f604c76da4f23dcf1db4a57b0808ea",
       },
     ],
     "id": "SNYK-PYTHON-DJANGO-1090612",
+    "modified": "2021-04-06T13:57:02.213825Z",
     "name": "SNYK-PYTHON-DJANGO-1090612",
+    "published": "2021-04-06T13:57:02.482219Z",
     "relationships": Array [
       Object {
         "affect": Object {
@@ -462,11 +437,11 @@ Upgrade \`django\` to version 2.2.20, 3.0.14, 3.1.8 or higher.
               "score": Array [
                 Object {
                   "base": 3.7,
-                  "exploitability": "Not Defined",
-                  "impact": "[2.2, 2.2.20)",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "low",
+              "severity": "Low",
               "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
             },
           ],
@@ -527,23 +502,18 @@ Upgrade \`django\` to version 2.2.21, 3.1.9, 3.2.1 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://www.djangoproject.com/weblog/2021/may/04/security-releases/",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/c98f446c188596d4ba6de71d1b77b4a6c5c2a007",
-          },
-        ],
-        "modified": "2021-05-04T14:45:09.894750Z",
-        "published": "2021-05-04T14:45:10.137628Z",
-        "withdrawn": undefined,
+        "category": "ADVISORY",
+        "locator": "https://www.djangoproject.com/weblog/2021/may/04/security-releases/",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/c98f446c188596d4ba6de71d1b77b4a6c5c2a007",
       },
     ],
     "id": "SNYK-PYTHON-DJANGO-1279042",
+    "modified": "2021-05-04T14:45:09.894750Z",
     "name": "SNYK-PYTHON-DJANGO-1279042",
+    "published": "2021-05-04T14:45:10.137628Z",
     "relationships": Array [
       Object {
         "affect": Object {
@@ -569,11 +539,11 @@ Upgrade \`django\` to version 2.2.21, 3.1.9, 3.2.1 or higher.
               "score": Array [
                 Object {
                   "base": 3.3,
-                  "exploitability": "Not Defined",
-                  "impact": "[, 2.2.21)",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "low",
+              "severity": "Low",
               "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
             },
           ],
@@ -609,31 +579,26 @@ Upgrade \`django\` to version 3.2.2, 3.1.10, 2.2.22 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://www.djangoproject.com/weblog/2021/may/06/security-releases/",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/e1e81aa1c4427411e3c68facdd761229ffea6f6f",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/pull/14360",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://www.mail-archive.com/debian-bugs-dist@lists.debian.org/msg1804086.html",
-          },
-        ],
-        "modified": "2021-05-06T15:41:43.922301Z",
-        "published": "2021-05-06T15:41:44.175836Z",
-        "withdrawn": undefined,
+        "category": "ADVISORY",
+        "locator": "https://www.djangoproject.com/weblog/2021/may/06/security-releases/",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/e1e81aa1c4427411e3c68facdd761229ffea6f6f",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/pull/14360",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://www.mail-archive.com/debian-bugs-dist@lists.debian.org/msg1804086.html",
       },
     ],
     "id": "SNYK-PYTHON-DJANGO-1290072",
+    "modified": "2021-05-06T15:41:43.922301Z",
     "name": "SNYK-PYTHON-DJANGO-1290072",
+    "published": "2021-05-06T15:41:44.175836Z",
     "relationships": Array [
       Object {
         "affect": Object {
@@ -659,11 +624,11 @@ Upgrade \`django\` to version 3.2.2, 3.1.10, 2.2.22 or higher.
               "score": Array [
                 Object {
                   "base": 7.3,
-                  "exploitability": "Not Defined",
-                  "impact": "[3.2,3.2.2)",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "high",
+              "severity": "High",
               "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
             },
           ],
@@ -764,23 +729,18 @@ Upgrade \`jinja2\` to version 2.11.3 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/pallets/jinja/blob/ab81fd9c277900c85da0c322a2ff9d68a235b2e6/src/jinja2/utils.py%23L20",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/pallets/jinja/pull/1343",
-          },
-        ],
-        "modified": "2021-02-01T19:52:16.877030Z",
-        "published": "2021-02-01T19:52:17Z",
-        "withdrawn": undefined,
+        "category": "ADVISORY",
+        "locator": "https://github.com/pallets/jinja/blob/ab81fd9c277900c85da0c322a2ff9d68a235b2e6/src/jinja2/utils.py%23L20",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/pallets/jinja/pull/1343",
       },
     ],
     "id": "SNYK-PYTHON-JINJA2-1012994",
+    "modified": "2021-02-01T19:52:16.877030Z",
     "name": "SNYK-PYTHON-JINJA2-1012994",
+    "published": "2021-02-01T19:52:17Z",
     "relationships": Array [
       Object {
         "affect": Object {
@@ -806,11 +766,11 @@ Upgrade \`jinja2\` to version 2.11.3 or higher.
               "score": Array [
                 Object {
                   "base": 5.3,
-                  "exploitability": "Proof of Concept",
-                  "impact": "[,2.11.3)",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "medium",
+              "severity": "Medium",
               "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L/E:P",
             },
           ],
@@ -841,19 +801,14 @@ Upgrade \`jinja2\` to version 2.10.1 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://palletsprojects.com/blog/jinja-2-10-1-released",
-          },
-        ],
-        "modified": "2020-06-12T14:36:55.661596Z",
-        "published": "2019-04-07T00:42:43Z",
-        "withdrawn": undefined,
+        "category": "ADVISORY",
+        "locator": "https://palletsprojects.com/blog/jinja-2-10-1-released",
       },
     ],
     "id": "SNYK-PYTHON-JINJA2-174126",
+    "modified": "2020-06-12T14:36:55.661596Z",
     "name": "SNYK-PYTHON-JINJA2-174126",
+    "published": "2019-04-07T00:42:43Z",
     "relationships": Array [
       Object {
         "affect": Object {
@@ -879,11 +834,11 @@ Upgrade \`jinja2\` to version 2.10.1 or higher.
               "score": Array [
                 Object {
                   "base": 6,
-                  "exploitability": "Not Defined",
-                  "impact": "[,2.10.1)",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "medium",
+              "severity": "Medium",
               "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:L/I:L/A:L/RL:O",
             },
           ],
@@ -918,35 +873,30 @@ FileSystemBytecodeCache in Jinja2 2.7.2 does not properly create temporary direc
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/mitsuhiko/jinja2/commit/acb672b6a179567632e032f547582f30fa2f4aa7",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/mitsuhiko/jinja2/pull/292",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/mitsuhiko/jinja2/pull/296",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0012",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://bugzilla.redhat.com/show_bug.cgi?id=1051421",
-          },
-        ],
-        "modified": "2019-02-17T08:46:41.648104Z",
-        "published": "2014-01-18T05:33:40.101000Z",
-        "withdrawn": undefined,
+        "category": "ADVISORY",
+        "locator": "https://github.com/mitsuhiko/jinja2/commit/acb672b6a179567632e032f547582f30fa2f4aa7",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/mitsuhiko/jinja2/pull/292",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/mitsuhiko/jinja2/pull/296",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0012",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://bugzilla.redhat.com/show_bug.cgi?id=1051421",
       },
     ],
     "id": "SNYK-PYTHON-JINJA2-40250",
+    "modified": "2019-02-17T08:46:41.648104Z",
     "name": "SNYK-PYTHON-JINJA2-40250",
+    "published": "2014-01-18T05:33:40.101000Z",
     "relationships": Array [
       Object {
         "affect": Object {
@@ -972,11 +922,11 @@ FileSystemBytecodeCache in Jinja2 2.7.2 does not properly create temporary direc
               "score": Array [
                 Object {
                   "base": 5.3,
-                  "exploitability": "Not Defined",
-                  "impact": "[2.7.2]",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "medium",
+              "severity": "Medium",
               "vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:L",
             },
           ],
@@ -1007,19 +957,14 @@ Upgrade \`jinja2\` to version 2.8.1 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/pallets/jinja/commit/9b53045c34e61013dc8f09b7e52a555fa16bed16",
-          },
-        ],
-        "modified": "2020-06-12T14:36:58.461729Z",
-        "published": "2019-07-30T13:11:16Z",
-        "withdrawn": undefined,
+        "category": "ADVISORY",
+        "locator": "https://github.com/pallets/jinja/commit/9b53045c34e61013dc8f09b7e52a555fa16bed16",
       },
     ],
     "id": "SNYK-PYTHON-JINJA2-455616",
+    "modified": "2020-06-12T14:36:58.461729Z",
     "name": "SNYK-PYTHON-JINJA2-455616",
+    "published": "2019-07-30T13:11:16Z",
     "relationships": Array [
       Object {
         "affect": Object {
@@ -1045,11 +990,11 @@ Upgrade \`jinja2\` to version 2.8.1 or higher.
               "score": Array [
                 Object {
                   "base": 8.6,
-                  "exploitability": "Not Defined",
-                  "impact": "[2.5, 2.8.1)",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "high",
+              "severity": "High",
               "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N",
             },
           ],

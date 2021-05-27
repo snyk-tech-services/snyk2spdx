@@ -1,5 +1,5 @@
 import 'source-map-support/register';
-import { SnykIssue, SnykTestOutput, SPDXv3, Profile } from '../types';
+import { SnykTestOutput, SPDXv3, Profile } from '../types';
 import { convertSnykIssueToSpdx } from './convert-issue-to-spdx';
 import { generateDocumentNameSpace } from './generate-document-namespace';
 export { getInputData } from './get-input-data';
@@ -18,7 +18,7 @@ export function convertSnykTestOutputToSPDX(data: SnykTestOutput): SPDXv3 {
     description: `Snyk test result for project ${data.projectName} in SPDX SBOM format`,
     created: getDate(),
     vulnerabilities: data.vulnerabilities
-      .filter((i: SnykIssue) => i.type == undefined)
-      .map((i: SnykIssue) => convertSnykIssueToSpdx(i)),
+      .filter((i) => i.type !== 'license')
+      .map((i) => convertSnykIssueToSpdx(i)),
   };
 }
