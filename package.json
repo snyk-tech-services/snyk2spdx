@@ -8,7 +8,8 @@
     "lint": "npm run format:check && npm run lint:eslint",
     "lint:eslint": "eslint --cache '{src,test}/**/*.ts'",
     "test": "npm run lint && npm run test:unit",
-    "test:unit": "jest",
+    "test:unit": "jest test/unit --runInBand",
+    "test:system": "jest test/system",
     "test:coverage": "npm run test:unit -- --coverage",
     "test:watch": "tsc-watch --onSuccess 'npm run test:unit'",
     "build": "tsc",
@@ -38,7 +39,8 @@
     "snyk": "^1.606.0",
     "source-map-support": "^0.5.16",
     "tslib": "^1.10.0",
-    "uuid": "8.3.2"
+    "uuid": "8.3.2",
+    "yargs": "16.2.0"
   },
   "devDependencies": {
     "@types/jest": "26.0.23",
