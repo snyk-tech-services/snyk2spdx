@@ -104,11 +104,11 @@ Upgrade \`json\` to version 2.3.0 or higher.
             "score": Array [
               Object {
                 "base": 9.3,
-                "exploitability": "Not Defined",
-                "impact": "<2.3.0",
+                "exploitability": null,
+                "impact": null,
               },
             ],
-            "severity": "high",
+            "severity": "High",
             "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:L/A:H",
           },
         ],

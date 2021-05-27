@@ -105,11 +105,11 @@ Upgrade \`json\` to version 2.3.0 or higher.
               "score": Array [
                 Object {
                   "base": 9.3,
-                  "exploitability": "Not Defined",
-                  "impact": "<2.3.0",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "high",
+              "severity": "High",
               "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:L/A:H",
             },
           ],
@@ -171,11 +171,11 @@ Affected versions of this gem are vulnerable to arbitrary command executions due
               "score": Array [
                 Object {
                   "base": 5.6,
-                  "exploitability": "Not Defined",
-                  "impact": ">= 0",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "medium",
+              "severity": "Medium",
               "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
             },
           ],
@@ -237,11 +237,11 @@ Affected versions of this gem are vulnerable due to a flaw in \`command/basic.rb
               "score": Array [
                 Object {
                   "base": 7.8,
-                  "exploitability": "Not Defined",
-                  "impact": ">= 0",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "high",
+              "severity": "High",
               "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
             },
           ],
@@ -320,11 +320,11 @@ Upgrade \`django\` to version 2.2.19, 3.0.13, 3.1.7 or higher.
               "score": Array [
                 Object {
                   "base": 5.9,
-                  "exploitability": "Not Defined",
-                  "impact": "[2.2,2.2.19)",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "medium",
+              "severity": "Medium",
               "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:N/I:L/A:H",
             },
           ],
@@ -437,11 +437,11 @@ Upgrade \`django\` to version 2.2.20, 3.0.14, 3.1.8 or higher.
               "score": Array [
                 Object {
                   "base": 3.7,
-                  "exploitability": "Not Defined",
-                  "impact": "[2.2, 2.2.20)",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "low",
+              "severity": "Low",
               "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
             },
           ],
@@ -539,11 +539,11 @@ Upgrade \`django\` to version 2.2.21, 3.1.9, 3.2.1 or higher.
               "score": Array [
                 Object {
                   "base": 3.3,
-                  "exploitability": "Not Defined",
-                  "impact": "[, 2.2.21)",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "low",
+              "severity": "Low",
               "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
             },
           ],
@@ -624,11 +624,11 @@ Upgrade \`django\` to version 3.2.2, 3.1.10, 2.2.22 or higher.
               "score": Array [
                 Object {
                   "base": 7.3,
-                  "exploitability": "Not Defined",
-                  "impact": "[3.2,3.2.2)",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "high",
+              "severity": "High",
               "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
             },
           ],
@@ -766,11 +766,11 @@ Upgrade \`jinja2\` to version 2.11.3 or higher.
               "score": Array [
                 Object {
                   "base": 5.3,
-                  "exploitability": "Proof of Concept",
-                  "impact": "[,2.11.3)",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "medium",
+              "severity": "Medium",
               "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L/E:P",
             },
           ],
@@ -834,11 +834,11 @@ Upgrade \`jinja2\` to version 2.10.1 or higher.
               "score": Array [
                 Object {
                   "base": 6,
-                  "exploitability": "Not Defined",
-                  "impact": "[,2.10.1)",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "medium",
+              "severity": "Medium",
               "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:L/I:L/A:L/RL:O",
             },
           ],
@@ -922,11 +922,11 @@ FileSystemBytecodeCache in Jinja2 2.7.2 does not properly create temporary direc
               "score": Array [
                 Object {
                   "base": 5.3,
-                  "exploitability": "Not Defined",
-                  "impact": "[2.7.2]",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "medium",
+              "severity": "Medium",
               "vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:L",
             },
           ],
@@ -990,11 +990,11 @@ Upgrade \`jinja2\` to version 2.8.1 or higher.
               "score": Array [
                 Object {
                   "base": 8.6,
-                  "exploitability": "Not Defined",
-                  "impact": "[2.5, 2.8.1)",
+                  "exploitability": null,
+                  "impact": null,
                 },
               ],
-              "severity": "high",
+              "severity": "High",
               "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N",
             },
           ],

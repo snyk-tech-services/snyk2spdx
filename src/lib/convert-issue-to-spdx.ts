@@ -1,18 +1,22 @@
 import * as types from '../types';
 
+function capitalize(str: string): string {
+  return str[0].toUpperCase() + str.slice(1);
+}
+
 function getVulnerabilityRating(
   issue: types.SnykIssue,
 ): types.VulnerabilityRating[] {
   const vulnerabilityRatingScore: types.VulnerabilityRatingScore = {
     base: issue.cvssScore,
-    exploitability: issue.exploit,
-    impact: issue.semver.vulnerable[0],
+    exploitability: null,
+    impact: null,
   };
 
   const vulnerabilityRating: types.VulnerabilityRating = {
     method: issue.CVSSv3 ? 'CVSS_3' : undefined, // must be CVSS_2, CVSS_3, OWASP_RISK or OTHER
     score: [vulnerabilityRatingScore],
-    severity: issue.severity, // exploitability score of the vulnerability either None, Low, Medium, High or Critical
+    severity: capitalize(issue.severity), // exploitability score of the vulnerability either None, Low, Medium, High or Critical
     vector: issue.CVSSv3,
   };
 

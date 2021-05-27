@@ -73,8 +73,8 @@ export interface VulnerabilityRating {
 
 export interface VulnerabilityRatingScore {
   base: number;
-  exploitability: string;
-  impact: string;
+  exploitability: string | null;
+  impact: string | null;
 }
 
 export interface ExternalReferencesRelationship {
