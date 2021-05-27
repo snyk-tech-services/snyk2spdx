@@ -15,7 +15,9 @@
     "build-watch": "tsc -w",
     "prepare": "npm run build",
     "snyk-test": "snyk test",
-    "pkg-binaries": "npx pkg . -t node12-linux-x64,node12-macos-x64,node12-win-x64 --out-path ./dist/binaries"
+    "pkg-binaries": "npx nexe@3.3.7 dist/index.js -r './dist/**/*.js' -t mac-x64-10.21.0 -o  snyk2spdx-macos"  },
+  "bin": {
+    "snyk2spdx": "dist/index.js"
   },
   "types": "./dist/index.d.ts",
   "repository": {
