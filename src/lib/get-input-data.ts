@@ -1,6 +1,5 @@
 export async function readInputFromStdin(): Promise<string> {
   return new Promise<string>((resolve, reject) => {
-    setTimeout(() => reject(new Error('No input detected')), 100);
     let jsonString = '';
     process.stdin.setEncoding('utf8');
     process.stdin.on('readable', () => {
