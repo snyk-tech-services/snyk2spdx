@@ -71,10 +71,8 @@ describe('convertSnykTestOutputToSPDX', () => {
     });
     expect(res.vulnerabilities.sort()).toMatchSnapshot();
     // TODO: comment out once functionality in place
-    // expect(
-    //   (res.vulnerabilities as any).find(
-    //     (i: any) => i.id === 'snyk:lic:pip:pytz:MIT',
-    //   ),
-    // ).toEqual([]);
+    expect(
+      res.vulnerabilities.find((i) => i.id === 'snyk:lic:pip:pytz:MIT'),
+    ).toEqual(undefined);
   });
 });
