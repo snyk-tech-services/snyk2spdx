@@ -39,6 +39,9 @@ export interface Vulnerability {
   details: string; //string, multi line may include steps to reproduce, detail impact analysis or remediation guidance
   relationships: VulnerabilityRelationship[]; //field provides information about the relationships between the vulnerability and other SPDX elements.
   externalReferences?: ExternalReference[];
+  modified?: string; // YYYY-MM-DDThh:mm:ssZ
+  published?: string; // YYYY-MM-DDThh:mm:ssZ
+  withdrawn?: string; // YYYY-MM-DDThh:mm:ssZ
 }
 
 export interface VulnerabilityRelationship {
@@ -69,21 +72,18 @@ export interface VulnerabilityRating {
 }
 
 export interface VulnerabilityRatingScore {
-      base: number;
-      exploitability: string;
-      impact: string;
-  }
-  
+  base: number;
+  exploitability: string;
+  impact: string;
+}
+
 export interface ExternalReferencesRelationship {
-      category: string | undefined // must be either ADVISORY, ARTICLE, FIX, REPORT or OTHER.
-      locator: string // url
-  }
-  
+  category: string | undefined; // must be either ADVISORY, ARTICLE, FIX, REPORT or OTHER.
+  locator: string; // url
+}
+
 export interface ExternalReference {
   externalReferencesRelationships: ExternalReferencesRelationship[];
-  modified?: string; // YYYY-MM-DDThh:mm:ssZ
-  published?: string; // YYYY-MM-DDThh:mm:ssZ
-  withdrawn?: string; // YYYY-MM-DDThh:mm:ssZ
 }
 
 export interface DefectResponse {
@@ -134,21 +134,21 @@ interface ProfileVulnerability {
 
 export interface SnykIssue {
   id: string;
-  title : string;
-  description : string;
+  title: string;
+  description: string;
   from: string[];
   credit: string[];
   cvssScore: number;
   severity: string;
   CVSSv3: string;
   exploit: string;
+  type?: string; // only present on License issues
   semver: SnykIssueSemver;
   modificationTime: string;
   publicationTime: string;
   references: SnykIssueReference[];
   creationTime: string;
   identifiers: SnykIssueIdentifiers;
-  type : string | undefined;
 }
 
 export interface SnykIssueSemver {
@@ -218,4 +218,3 @@ interface SnykIssueIdentifiers {
   CVE: string[];
   NSP?: number;
 }
-

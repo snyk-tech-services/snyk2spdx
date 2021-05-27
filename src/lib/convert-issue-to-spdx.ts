@@ -44,9 +44,6 @@ function getVulnerabilityExternalReferences(
     externalReferencesRelationships: getExternalReferencesRelationships(
       issue.references,
     ),
-    modified: issue.modificationTime, // YYYY-MM-DDThh:mm:ssZ
-    published: issue.publicationTime,
-    withdrawn: undefined, // not mandatory, setting at undefined
   };
 
   const externalReferences: types.ExternalReference[] = [externalReference];
@@ -114,5 +111,7 @@ export function convertSnykIssueToSpdx(
     details: issue.description,
     relationships: getVulnerabilityRelationship(issue),
     externalReferences: getVulnerabilityExternalReferences(issue),
+    modified: issue.modificationTime, // YYYY-MM-DDThh:mm:ssZ
+    published: issue.publicationTime,
   };
 }
