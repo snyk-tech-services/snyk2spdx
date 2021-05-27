@@ -2,6 +2,7 @@ import 'source-map-support/register';
 import { SnykIssue, SnykTestOutput, SPDXv3, Profile } from '../types';
 import { convertSnykIssueToSpdx } from './convert-issue-to-spdx';
 import { generateDocumentNameSpace } from './generate-document-namespace';
+export { getInputData } from './get-input-data';
 
 export function convertSnykTestOutputToSPDX(data: SnykTestOutput): SPDXv3 {
   const outputFileName = data.projectName;

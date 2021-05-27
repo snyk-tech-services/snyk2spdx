@@ -7,4 +7,21 @@
 Snyk helps you find, fix and monitor for known vulnerabilities in your dependencies, both on an ad hoc basis and as part of your CI (Build) system.
 
 ## Snyk snyk2spdx
-convert the snyk ouput to spdx format output
+Convert the Snyk CLI output to SPDX format
+
+## Usage
+Basic:
+`snyk test --json | snyk2spdx`
+
+With output file:
+`snyk test --json | snyk2spdx --output=spdx.json`
+
+```
+Commands:
+  snyk2spdx snyk:test  Convert `snyk test --json` output to SPDX SBOM  [default]
+
+Options:
+  --version  Show version number                                       [boolean]
+  --help     Show help                                                 [boolean]
+  --output   Save the output to the specified file name. Defaults to stdout
+```
