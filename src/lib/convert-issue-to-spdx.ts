@@ -10,7 +10,7 @@ function getVulnerabilityRating(
   };
 
   const vulnerabilityRating: types.VulnerabilityRating = {
-    method: issue.CVSSv3 ? 'CVSS_3' : 'undefined', // must be CVSS_2, CVSS_3, OWASP_RISK or OTHER
+    method: issue.CVSSv3 ? 'CVSS_3' : undefined, // must be CVSS_2, CVSS_3, OWASP_RISK or OTHER
     score: [vulnerabilityRatingScore],
     severity: issue.severity, // exploitability score of the vulnerability either None, Low, Medium, High or Critical
     vector: issue.CVSSv3,
@@ -28,7 +28,7 @@ function getExternalReferencesRelationships(
   externalReferencesRelationship = references
     ? references.map((step) => {
         return {
-          category: undefined, // not amndatory,but should be either ADVISORY, ARTICLE, FIX, REPORT or OTHER.
+          category: 'ADVISORY', // not mandatory,but should be either ADVISORY, ARTICLE, FIX, REPORT or OTHER.
           locator: step.url, // url
         };
       })
@@ -74,7 +74,7 @@ function getVulnerabilityRelationship(
     type: 'AFFECTS',
   };
 
-  const vulnerabilityfoundBy: types.AffectedBy = {
+  const vulnerabilityFoundBy: types.AffectedBy = {
     to: issue.credit,
     type: 'FOUND_BY',
   };
@@ -95,7 +95,7 @@ function getVulnerabilityRelationship(
   const relationship: types.VulnerabilityRelationship[] = [
     {
       affect: vulnerabilityAffect,
-      foundBy: vulnerabilityfoundBy,
+      foundBy: vulnerabilityFoundBy,
       suppliedBy: vulnerabilitySuppliedBy,
       ratedBy: ratedBy,
     },

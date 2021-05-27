@@ -73,7 +73,7 @@ Upgrade \`json\` to version 2.3.0 or higher.
     Object {
       "externalReferencesRelationships": Array [
         Object {
-          "category": undefined,
+          "category": "ADVISORY",
           "locator": "https://www.ruby-lang.org/en/news/2020/03/19/json-dos-cve-2020-10663/",
         },
       ],
