@@ -71,12 +71,8 @@ Upgrade \`json\` to version 2.3.0 or higher.
 ",
   "externalReferences": Array [
     Object {
-      "externalReferencesRelationships": Array [
-        Object {
-          "category": "ADVISORY",
-          "locator": "https://www.ruby-lang.org/en/news/2020/03/19/json-dos-cve-2020-10663/",
-        },
-      ],
+      "category": "ADVISORY",
+      "locator": "https://www.ruby-lang.org/en/news/2020/03/19/json-dos-cve-2020-10663/",
     },
   ],
   "id": "SNYK-RUBY-JSON-560838",

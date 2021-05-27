@@ -72,12 +72,8 @@ Upgrade \`json\` to version 2.3.0 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://www.ruby-lang.org/en/news/2020/03/19/json-dos-cve-2020-10663/",
-          },
-        ],
+        "category": "ADVISORY",
+        "locator": "https://www.ruby-lang.org/en/news/2020/03/19/json-dos-cve-2020-10663/",
       },
     ],
     "id": "SNYK-RUBY-JSON-560838",
@@ -142,12 +138,8 @@ Affected versions of this gem are vulnerable to arbitrary command executions due
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "http://rubysec.com/advisories/OSVDB-108579",
-          },
-        ],
+        "category": "ADVISORY",
+        "locator": "http://rubysec.com/advisories/OSVDB-108579",
       },
     ],
     "id": "SNYK-RUBY-LYNX-20160",
@@ -212,12 +204,8 @@ Affected versions of this gem are vulnerable due to a flaw in \`command/basic.rb
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "http://rubysec.com/advisories/CVE-2014-5002",
-          },
-        ],
+        "category": "ADVISORY",
+        "locator": "http://rubysec.com/advisories/CVE-2014-5002",
       },
     ],
     "id": "SNYK-RUBY-LYNX-20161",
@@ -291,20 +279,16 @@ Upgrade \`django\` to version 2.2.19, 3.0.13, 3.1.7 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://www.djangoproject.com/weblog/2021/feb/19/security-releases/",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/be8237c7cce24b06aabde0b97afce98ddabbe3b6",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://snyk.io/blog/cache-poisoning-in-popular-open-source-packages/",
-          },
-        ],
+        "category": "ADVISORY",
+        "locator": "https://www.djangoproject.com/weblog/2021/feb/19/security-releases/",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/be8237c7cce24b06aabde0b97afce98ddabbe3b6",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://snyk.io/blog/cache-poisoning-in-popular-open-source-packages/",
       },
     ],
     "id": "SNYK-PYTHON-DJANGO-1076802",
@@ -404,28 +388,24 @@ Upgrade \`django\` to version 2.2.20, 3.0.14, 3.1.8 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/2820fd1be5dfccbf1216c3845fad8580502473e1",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a454ca49c2",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/cca0d98118cccf9ae0c6dcf2d6c57fc50469fbf0",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/d4d800ca1addc4141e03c5440a849bb64d1582cd",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/e7fba62248f604c76da4f23dcf1db4a57b0808ea",
-          },
-        ],
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/2820fd1be5dfccbf1216c3845fad8580502473e1",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/4036d62bda0e9e9f6172943794b744a454ca49c2",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/cca0d98118cccf9ae0c6dcf2d6c57fc50469fbf0",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/d4d800ca1addc4141e03c5440a849bb64d1582cd",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/e7fba62248f604c76da4f23dcf1db4a57b0808ea",
       },
     ],
     "id": "SNYK-PYTHON-DJANGO-1090612",
@@ -522,16 +502,12 @@ Upgrade \`django\` to version 2.2.21, 3.1.9, 3.2.1 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://www.djangoproject.com/weblog/2021/may/04/security-releases/",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/c98f446c188596d4ba6de71d1b77b4a6c5c2a007",
-          },
-        ],
+        "category": "ADVISORY",
+        "locator": "https://www.djangoproject.com/weblog/2021/may/04/security-releases/",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/c98f446c188596d4ba6de71d1b77b4a6c5c2a007",
       },
     ],
     "id": "SNYK-PYTHON-DJANGO-1279042",
@@ -603,24 +579,20 @@ Upgrade \`django\` to version 3.2.2, 3.1.10, 2.2.22 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://www.djangoproject.com/weblog/2021/may/06/security-releases/",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/commit/e1e81aa1c4427411e3c68facdd761229ffea6f6f",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/django/django/pull/14360",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://www.mail-archive.com/debian-bugs-dist@lists.debian.org/msg1804086.html",
-          },
-        ],
+        "category": "ADVISORY",
+        "locator": "https://www.djangoproject.com/weblog/2021/may/06/security-releases/",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/commit/e1e81aa1c4427411e3c68facdd761229ffea6f6f",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/django/django/pull/14360",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://www.mail-archive.com/debian-bugs-dist@lists.debian.org/msg1804086.html",
       },
     ],
     "id": "SNYK-PYTHON-DJANGO-1290072",
@@ -757,16 +729,12 @@ Upgrade \`jinja2\` to version 2.11.3 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/pallets/jinja/blob/ab81fd9c277900c85da0c322a2ff9d68a235b2e6/src/jinja2/utils.py%23L20",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/pallets/jinja/pull/1343",
-          },
-        ],
+        "category": "ADVISORY",
+        "locator": "https://github.com/pallets/jinja/blob/ab81fd9c277900c85da0c322a2ff9d68a235b2e6/src/jinja2/utils.py%23L20",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/pallets/jinja/pull/1343",
       },
     ],
     "id": "SNYK-PYTHON-JINJA2-1012994",
@@ -833,12 +801,8 @@ Upgrade \`jinja2\` to version 2.10.1 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://palletsprojects.com/blog/jinja-2-10-1-released",
-          },
-        ],
+        "category": "ADVISORY",
+        "locator": "https://palletsprojects.com/blog/jinja-2-10-1-released",
       },
     ],
     "id": "SNYK-PYTHON-JINJA2-174126",
@@ -909,28 +873,24 @@ FileSystemBytecodeCache in Jinja2 2.7.2 does not properly create temporary direc
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/mitsuhiko/jinja2/commit/acb672b6a179567632e032f547582f30fa2f4aa7",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/mitsuhiko/jinja2/pull/292",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/mitsuhiko/jinja2/pull/296",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0012",
-          },
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://bugzilla.redhat.com/show_bug.cgi?id=1051421",
-          },
-        ],
+        "category": "ADVISORY",
+        "locator": "https://github.com/mitsuhiko/jinja2/commit/acb672b6a179567632e032f547582f30fa2f4aa7",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/mitsuhiko/jinja2/pull/292",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://github.com/mitsuhiko/jinja2/pull/296",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0012",
+      },
+      Object {
+        "category": "ADVISORY",
+        "locator": "https://bugzilla.redhat.com/show_bug.cgi?id=1051421",
       },
     ],
     "id": "SNYK-PYTHON-JINJA2-40250",
@@ -997,12 +957,8 @@ Upgrade \`jinja2\` to version 2.8.1 or higher.
 ",
     "externalReferences": Array [
       Object {
-        "externalReferencesRelationships": Array [
-          Object {
-            "category": "ADVISORY",
-            "locator": "https://github.com/pallets/jinja/commit/9b53045c34e61013dc8f09b7e52a555fa16bed16",
-          },
-        ],
+        "category": "ADVISORY",
+        "locator": "https://github.com/pallets/jinja/commit/9b53045c34e61013dc8f09b7e52a555fa16bed16",
       },
     ],
     "id": "SNYK-PYTHON-JINJA2-455616",

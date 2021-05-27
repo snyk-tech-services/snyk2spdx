@@ -82,9 +82,7 @@ export interface ExternalReferencesRelationship {
   locator: string; // url
 }
 
-export interface ExternalReference {
-  externalReferencesRelationships: ExternalReferencesRelationship[];
-}
+export type ExternalReference = ExternalReferencesRelationship;
 
 export interface DefectResponse {
   id: string;
