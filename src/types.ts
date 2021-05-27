@@ -14,7 +14,7 @@ export interface SPDXv3 {
   // Single line of text with the following keywords:
   // "Person: person name" and optional "(email)"
   // "Organization: organization" and optional "(email)"
-  // "Tool: toolidentifier-version"
+  // "Tool: toolIdentifier-version"
   creator: string;
   vulnerabilities: Vulnerability[];
   defectResponses?: DefectResponse[];
@@ -62,7 +62,7 @@ export interface RatedBy {
 }
 
 export interface VulnerabilityRating {
-  method: string; // must be CVSS_2, CVSS_3, OWASP_RISK or OTHER
+  method: string | undefined; // must be CVSS_2, CVSS_3, OWASP_RISK or OTHER
   score: VulnerabilityRatingScore[];
   severity: string; // exploitability score of the vulnerability either None, Low, Medium, High or Critical
   vector: string; // textual representation of the metric values used
