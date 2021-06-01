@@ -1,29 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`\`snyk2spdx snyk:test\` Shows help text as expected 1`] = `
-"index.js
+exports[`\`snyk2spdx snyk:test\` Shows help text as expected 1`] = `""`;
 
-Convert \`snyk test --json\` output to SPDX SBOM
+exports[`\`snyk2spdx snyk:test\` Shows help text as expected when calling command explicitly 1`] = `""`;
 
-Commands:
-  index.js snyk:test  Convert \`snyk test --json\` output to SPDX SBOM   [default]
-
-Options:
-  --version  Show version number                                       [boolean]
-  --help     Show help                                                 [boolean]
-  --output   Save the output to the specified file name. Defaults to stdout"
-`;
-
-exports[`\`snyk2spdx snyk:test\` Shows help text as expected when calling command explicitly 1`] = `
-"index.js
-
-Convert \`snyk test --json\` output to SPDX SBOM
-
-Commands:
-  index.js snyk:test  Convert \`snyk test --json\` output to SPDX SBOM   [default]
-
-Options:
-  --version  Show version number                                       [boolean]
-  --help     Show help                                                 [boolean]
-  --output   Save the output to the specified file name. Defaults to stdout"
-`;
+exports[`\`snyk2spdx snyk:test\` show help when no input 1`] = `""`;

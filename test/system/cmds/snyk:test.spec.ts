@@ -19,6 +19,16 @@ describe('`snyk2spdx snyk:test`', () => {
       done();
     });
   }, 70000);
+  it('show help when no input', (done) => {
+    exec(`node ${main}`, (err, stdout) => {
+      if (err) {
+        throw err;
+      }
+      expect(err).toBeNull();
+      expect(stdout.trim()).toMatchSnapshot();
+      done();
+    });
+  }, 70000);
   it('Shows help text as expected when calling command explicitly', (done) => {
     exec(`node ${main} snyk:jest help`, (err, stdout) => {
       if (err) {
