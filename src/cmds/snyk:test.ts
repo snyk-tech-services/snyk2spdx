@@ -39,7 +39,7 @@ export async function handler(argv: {
     } else {
       console.log(spdxOutputStringified);
     }
-  } catch (e) {
+  } catch (e: any) {
     debug('Failed to generate data.\n' + e.message);
     console.error(
       `ERROR! Failed to convert to SPDX. Try running with \`DEBUG=snyk* <command> for more info\`.\nERROR: ${e}`,
