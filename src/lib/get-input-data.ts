@@ -17,7 +17,7 @@ export async function getInputData<InputType>(): Promise<InputType> {
   try {
     const inputData = await readInputFromStdin();
     return JSON.parse(inputData);
-  } catch (e) {
+  } catch (e: any) {
     throw new Error(`Failed to parse input. ERROR: ${e.message}`);
   }
 }
