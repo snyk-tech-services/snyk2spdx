@@ -4,7 +4,7 @@
 
 [![Known Vulnerabilities](https://snyk.io/test/github/snyk-tech-services/snyk2spdx/badge.svg)](https://snyk.io/test/github/snyk-tech-services/snyk2spdx)
 
-Snyk helps you find, fix and monitor for known vulnerabilities in your dependencies, both on an ad hoc basis and as part of your CI (Build) system.
+Snyk helps you find, fix, and monitor known vulnerabilities in your dependencies--both on an ad hoc basis and as part of your CI (build) system.
 
 ## Snyk snyk2spdx
 Convert the Snyk CLI output to SPDX format
