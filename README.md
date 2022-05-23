@@ -9,6 +9,9 @@ Snyk helps you find, fix, and monitor known vulnerabilities in your dependencies
 ## Snyk snyk2spdx
 Convert the Snyk CLI output to SPDX format
 
+## Notice
+**snyk2spdx does not support using the `--all-projects` flag with `snyk test`. Please use only `snyk test`**
+
 ## Usage
 - Basic
 `snyk test --json | snyk2spdx`
