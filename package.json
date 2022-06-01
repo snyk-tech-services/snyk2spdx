@@ -37,7 +37,7 @@
   ],
   "homepage": "https://github.com/snyk-tech-services/snyk2spdx#readme",
   "dependencies": {
-    "@snyk/protect": "1.724.0",
+    "@snyk/protect": "1.925.0",
     "debug": "4.3.2",
     "lodash": "^4.17.15",
     "source-map-support": "^0.5.16",
