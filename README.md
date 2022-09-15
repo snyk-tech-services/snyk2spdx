@@ -15,6 +15,23 @@ Note: **This repository is not in active developemnt and critical bug fixes only
 ## Notice
 **snyk2spdx does not support using the `--all-projects` flag with `snyk test`. Please use only `snyk test`**
 
+## Installation
+1. Install the npm module `pkg`.
+
+`npm install -g pkg`
+
+2. Install the snyk2spdx npm module.
+```
+cd snyk2spdx
+npm install [ --legacy-peer-deps]
+```
+-  `--legacy-peer-deps` might be necessary to install the module due to old dependencies.
+
+3. Turn the module into a binary.
+
+`pkg .`
+
+
 ## Usage
 - Basic
 `snyk test --json | snyk2spdx`
