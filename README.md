@@ -7,7 +7,11 @@
 Snyk helps you find, fix, and monitor known vulnerabilities in your dependencies--both on an ad hoc basis and as part of your CI (build) system.
 
 ## Snyk snyk2spdx
-[![Not Maintained](https://img.shields.io/badge/Maintenance%20Level-Not%20Maintained-yellow.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
+[![Inactively Maintained](https://img.shields.io/badge/Maintenance%20Level-Inactively%20Maintained-yellowgreen.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
+
+
+**This repository is in maintenance mode, no new features are being developed. Bug & security fixes will continue to be delivered. Open source contributions are welcome for small features & fixes (no breaking changes)**
+
 
 Convert the Snyk CLI output to SPDX format. 
 Note: **This repository is not in active developemnt and critical bug fixes only will be considered.**
