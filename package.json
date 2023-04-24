@@ -37,13 +37,13 @@
   ],
   "homepage": "https://github.com/snyk-tech-services/snyk2spdx#readme",
   "dependencies": {
-    "@snyk/protect": "1.724.0",
+    "@snyk/protect": "1.1137.0",
     "debug": "4.3.4",
     "lodash": "^4.17.15",
     "source-map-support": "^0.5.16",
-    "tslib": "^1.10.0",
+    "tslib": "^2.5.0",
     "uuid": "8.3.2",
-    "yargs": "16.2.0"
+    "yargs": "17.7.1"
   },
   "devDependencies": {
     "@semantic-release/exec": "5.0.0",
